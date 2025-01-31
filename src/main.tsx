@@ -20,10 +20,8 @@ import ResetPassword from '@/components/tank/authResetPassword.tsx';
 
 import Landing from './landing/Landing.tsx';
 
-import AppADR from "@/components/tank/app_adr"
 import ToolRouter from "@/tools/router"
 
-import AppADRDashboard from "@/components/tank/app_adr_dashboard"
 import AppSettings from "@/components/tank/app_settings"
 import SettingsTeams from "@/components/tank/settings-teams"
 import SettingsTools from "@/components/tank/settings-tools"
@@ -60,10 +58,6 @@ const router = createBrowserRouter([
         path: "/account",
         element: isAuthenticated() ? <Account /> : <Navigate replace to="/login" />,
       },
-      /*{
-        path: ":portfolio",
-        element: isAuthenticated() ? <PortfolioHome /> : <Navigate replace to="/login" />,
-      },*/
       {
         path: ":portfolio/settings",
         element: isAuthenticated() ? <AppSettings /> : <Navigate replace to="/login" />,
@@ -86,27 +80,6 @@ const router = createBrowserRouter([
           }
           // Add more nested routes as needed
         ],
-      },
-      /*{
-        path: ":portfolio/:org",
-        element: isAuthenticated() ? <OrgHome /> : <Navigate replace to="/login" />,
-      },
-      {
-        path: ":portfolio/:org/data",
-        element: isAuthenticated() ? <HomeDashboard /> : <Navigate replace to="/login" />,
-      },
-      {
-        path: ":portfolio/:org/data/:ring",
-        element: isAuthenticated() ? <AppData /> : <Navigate replace to="/login" />,
-      },
-      */
-      {
-        path: ":portfolio/:org/adr",
-        element: isAuthenticated() ? <AppADRDashboard /> : <Navigate replace to="/login" />,
-      },
-      {
-        path: ":portfolio/:org/adr/:ring",
-        element: isAuthenticated() ? <AppADR /> : <Navigate replace to="/login" />,
       },
       {
         path: "/:portfolio/:org/:tool",

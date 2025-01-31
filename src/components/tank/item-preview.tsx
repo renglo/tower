@@ -153,19 +153,19 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
       let componentToRender;
   
       switch (name) {
-          case 'sensors':
+          case 'usecase1':
               componentToRender = <GraphTimeseries2 />;
               break;
-          case 'adr_dispatches':
+          case 'usecase2':
               componentToRender = <GraphBarchart />;
               break;
-          case 'adr_programs':
+          case 'usecase3':
               componentToRender = <GraphComparisonBar />;
               break;
-          case 'adr_sites':
+          case 'usecase4':
               componentToRender = <GraphRadial />;
               break;
-          case 'adr_meters':
+          case 'usecase5':
               componentToRender = <GraphWave />;
               break;
           default:

@@ -162,12 +162,6 @@ export default function FormPost({ refreshUp, blueprint, path, method }: FormPos
   function renderFormField(field: FieldDefinition, formField: FormField, Rich: RichDefinition) {
 
 
-      
-  
-      //console.log('Rich:');
-      //console.log(Rich);
-      //console.log(Rich['acct_accounts']);
-      //console.log(field.source.split(':')[0]);
   
       switch (field.widget) {
         case "text":
