@@ -113,3 +113,40 @@ template is updated, you might have to resolve a git rebase.
 `git config pull.rebase true`
 
 
+
+
+### STEP 8: Install Dependencies
+
+`npm install`
+`npm install vite`
+
+Install Crypto JS
+`npm install crypto-js`
+
+
+Then run the dev server
+
+`npm run dev`
+
+
+If you are getting errors, clear the libraries and start over
+
+`rm -rf node_modules`
+`rm package-lock.json`
+`npm install`
+
+If you are still getting errors, update the nvm version
+
+`nvm install 18`
+
+Then try running the dev server again
+
+
+`npm run dev`
+
+
+
+
+
+
+
