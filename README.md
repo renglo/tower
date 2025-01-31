@@ -156,4 +156,15 @@ Place the image that is listed in the config files `.env.*`
 
 
 
+### MILESTONE
+
+At this point, you should be able to run both Tower and Tank together. 
+Try going to http://127.0.0.1:5173 and login. Tower should send the authentication request to Cognito, get the response, 
+then Tower should contact Tank's API. You should see data coming from the DB in the UI. 
+
+
+
+
+
+
 

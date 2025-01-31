@@ -18,7 +18,7 @@ export default function SheetNav({portfolio,org}:SheetNavProps) {
     return ( 
 
         <>
-            {tool === 'gartic' && <ToolDataSheetNav portfolio={portfolio} org={org} />}
+            {tool === 'data' && <ToolDataSheetNav portfolio={portfolio} org={org} />}
         </> 
     
     )
