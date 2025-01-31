@@ -146,6 +146,13 @@ Then try running the dev server again
 
 
 
+#### STEP 9 : Add the logo
+
+Create a folder caller /public in the root of the project
+Place the image that is listed in the config files `.env.*` 
+
+`VITE_WL_LOGO='/<small_logo>.jpg'`
+`VITE_WL_LOGIN='/<big_logo>.jpg'`
 
 
 
