@@ -61,7 +61,7 @@ Your code will be untouched as template files will be overriden by your changes.
 - Replace the placeholders with the real configuration
 
 
-### STEP 5: Install the Landing page for this project
+### STEP 6: Install the Landing page for this project
 
 
 - Rename the file  /landing/Landing.tsx.TEMPLATE to /landing/Landing.tsx
@@ -70,5 +70,46 @@ Your code will be untouched as template files will be overriden by your changes.
 
 
 
-### STEP 6: Install Tools
+### STEP 7: Install Tools
+
+- The template comes with two default tools : Data and Schd
+- A tool is the equivalent of an "app" in the frontend. Teams are assigned "Tools" they can work with
+- A tool is represented by a folder with the following structure
+
+/<tool_name>-┐
+             └---<tool_name>.tsx
+             |
+             └---/blueprints ---┐
+             |                  └--/<tool_name>_<ring_name>.json
+             |                  └--...as many blueprints as the tool might need
+             |
+             └---/components ---┐
+             |                  └--/<tool_name>_<component_name>.tsx
+             |                  └--...as many custom components as the tool might need
+             |
+             └---/navigation ---┐
+             |                  └--/tool_<tool_name>_sidenav.tsx
+             |                  └--/tool_<tool_name>_sheetnav.tsx
+             |
+             └---/pages --------┐
+                                └--/tool_<tool_name>_<page_name>.tsx
+                                └--...as many custom pages as the tool might need
+
+
+
+- In order to activate the different components of the tool, you need to list its components in different places
+
+a) To setup the Tool side navigation menu, add it to /tools/nav.tsx
+b) To setup the Tool sheet navigation menu, add it to /tools/sheetnav.tsx
+c) To link the pages with the menu icons, add the page components to the sidenav and sheetnav components
+d) If link a custom component in /components, call it from any other component using the tool route
+e) To make the Tool reachable via a URL route, list the tool component in /tools/router.tsx
+
+- The UI won't show the Tool if the user is not listed in a team that has access to that tool in any given organization
+
+IMPORTANT: router.tsx, nav.tsx and sheetnav.tsx are some of the few template files that are overwritten locally. Please be aware that when the 
+template is updated, you might have to resolve a git rebase. 
+
+`git config pull.rebase true`
+
 
