@@ -22,10 +22,10 @@ You can check like this:
 `git remote -v`
 
 
-origin  https://github.com/renglo/<projectname>_tank.git (fetch)
-origin  https://github.com/renglo/<projetname>_tank.git (push)
-upstream        https://github.com/renglo/tank.git (fetch)
-upstream        https://github.com/renglo/tank.git (push)
+origin  https://github.com/renglo/<projectname>_tower.git (fetch)
+origin  https://github.com/renglo/<projetname>_tower.git (push)
+upstream        https://github.com/renglo/tower.git (fetch)
+upstream        https://github.com/renglo/tower.git (push)
 
 
 #### Step 4: To acquire changes from the template run
@@ -156,11 +156,27 @@ Place the image that is listed in the config files `.env.*`
 
 
 
-### MILESTONE
+### MILESTONE 1
 
 At this point, you should be able to run both Tower and Tank together. 
 Try going to http://127.0.0.1:5173 and login. Tower should send the authentication request to Cognito, get the response, 
 then Tower should contact Tank's API. You should see data coming from the DB in the UI. 
+
+
+
+#### STEP 10: Deploying to the cloud
+
+You need to build the app. It all gets reduced to a JS and a CSS file that Flask will use
+
+`yarn build`
+
+- Notice that this step usually returns many TS errors. The system won't let you continue without resolving each one of them. 
+- Have AI help you through each one of the errors. 
+- Once it has been built, go to Tank and deploy from there. 
+
+VERY IMPORTANT: Double check that the Symbolic Link in Tank is pointing to the /dist folder in this repository
+
+
 
 
 

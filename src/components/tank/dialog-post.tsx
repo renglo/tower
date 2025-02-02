@@ -49,7 +49,7 @@ export default function DialogPost({ refreshUp, blueprint, path, method, title, 
 
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="h-[500px] w-[375px] rounded-md border p-6" >
+        <ScrollArea className="h-[60vh]">
           <FormPost
               refreshUp={refreshAction}
               blueprint={blueprint}
