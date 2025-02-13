@@ -20,9 +20,10 @@ interface DialogPostProps {
   method: string;
   title: string;
   instructions: string;
+  buttontext?:string;
 }
 
-export default function DialogPost({ refreshUp, blueprint, path, method, title, instructions }: DialogPostProps) {
+export default function DialogPost({ refreshUp, blueprint, path, method, title, instructions, buttontext }: DialogPostProps) {
 
   const [open, setOpen] = useState(false);
   console.log('Blueprint @ DialogPost')
@@ -38,7 +39,7 @@ export default function DialogPost({ refreshUp, blueprint, path, method, title, 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create New</Button>
+        <Button>{buttontext || 'Create New'}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

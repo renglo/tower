@@ -26,6 +26,7 @@ import AppSettings from "@/components/tank/app_settings"
 import SettingsTeams from "@/components/tank/settings-teams"
 import SettingsTools from "@/components/tank/settings-tools"
 import SettingsOrgs from "@/components/tank/settings-orgs"
+import SettingsHome from "@/components/tank/settings-home"
 import UserHome from "@/components/tank/user-home"
 
 import './index.css'
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
           {
             path: "tools",
             element: <SettingsTools />,
+          },
+          {
+            path: "portfolios",
+            element: <SettingsHome />,
           }
           // Add more nested routes as needed
         ],

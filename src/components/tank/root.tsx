@@ -139,6 +139,7 @@ export default function Root() {
     console.log(refresh);
   };
 
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside 
@@ -242,12 +243,14 @@ export default function Root() {
 
           <div className="relative ml-auto flex-1 md:grow-0">
             <span className="hidden sm:flex">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                type="search"
-                placeholder="Search..."
-                className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-                />
+                <div className="hidden">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                  type="search"
+                  placeholder="Search..."
+                  className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
+                  />
+                </div>        
             </span>
           </div>
           <DropdownMenu>
@@ -318,8 +321,8 @@ export default function Root() {
                   Account settings
                 </NavLink>
               </DropdownMenuItem>
-              <DropdownMenuItem key="support">Support</DropdownMenuItem>
               <DropdownMenuItem key="logout" onClick={handleLogout}>Logout</DropdownMenuItem>
+              
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

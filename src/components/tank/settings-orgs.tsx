@@ -87,7 +87,7 @@ export default function SettingsOrgs() {
               <CardHeader>
                 <CardTitle>Organizations</CardTitle>
                 <CardDescription>
-                   An organization is a stand-alone entity that belongs to your portfolio and owns its data and processes. For example: If you own multiple buildings, each building would be an organization and they all would belong to your Building's Portfolio.
+                   An organization is a stand-alone entity that belongs to your portfolio.
                 </CardDescription>
               </CardHeader>
               <CardContent>

@@ -5,10 +5,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
+import {
+  RefreshCcw,
+} from "lucide-react"
+
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import DialogPost from "@/components/tank/dialog-post"
+
+import Onboarding from "@/tools/onboarding"
+
 
 export const description =
   "A settings page. The settings page has a sidebar navigation and a main content area. The main content area has a form to update the store name and a form to update the plugins directory. The sidebar navigation has links to general, security, integrations, support, organizations, and advanced settings."
@@ -64,6 +72,20 @@ export default function Account() {
   }, [ring]);
 
 
+  const refreshTree = async () => {
+    try {
+      // Fetch Blueprint
+      await fetch(`${import.meta.env.VITE_API_URL}/_auth/tree/refresh`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.accessToken}`,
+        },
+      });
+  
+    } catch (err) { 
+      console.log(err); // Log the error directly
+    }
+  };
 
 
   // Function to update the state
@@ -77,7 +99,7 @@ export default function Account() {
         <div className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">
       
           <div className="grid grid-cols-3 gap-4 ">
-            <Card>
+            <Card className="hidden">
               <CardHeader>
                 <CardTitle>Portfolios </CardTitle>
                 <CardDescription>
@@ -96,7 +118,26 @@ export default function Account() {
                 />
               </CardContent>             
             </Card> 
+            <Card>
+              <CardHeader>
+                <CardTitle>Install Gartic App</CardTitle>
+                <CardDescription>
+                  Click here to initiate the installation process.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+
+                <div className="text-xs text-muted-foreground">
+                    
+                    <Onboarding/>
+                  </div>
+                
+              </CardContent>             
+            </Card> 
           </div>
+          <button onClick={refreshTree} className="flex items-center">
+                      <RefreshCcw className="h-2 w-2" />
+          </button>
         </div>
   )
 }

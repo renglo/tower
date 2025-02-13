@@ -146,48 +146,6 @@ export default function SettingsHome() {
                 </Card>
 
 
-
-                <div>
-                    <h1>{tree.portfolios[p_portfolio].name}</h1>
-                    <h2>Organizations</h2>
-                    <ul>
-                        {Object.entries(tree.portfolios[p_portfolio].orgs).map(([orgId, org]) => (
-                            <li key={orgId}>
-                                <strong>{org.name}</strong> (ID: {org.org_id}) - {org.active ? 'Active' : 'Inactive'}
-                                <h3>Teams:</h3>
-                                <ul>
-                                    {org.teams.map(teamId => (
-                                        <li key={teamId}>{tree.portfolios[p_portfolio].teams[teamId].name}</li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <h2>Teams</h2>
-                    <ul>
-                        {Object.entries(tree.portfolios[p_portfolio].teams).map(([teamId, team]) => (
-                            <li key={teamId}>
-                                <strong>{team.name}</strong> (ID: {team.team_id})
-                                <h3>Tools:</h3>
-                                <ul>
-                                    {Object.entries(team.tools).map(([toolId]) => (
-                                        <li key={toolId}>
-                                            {tree.portfolios[p_portfolio].tools[toolId].name} (Handle: {tree.portfolios[p_portfolio].tools[toolId].handle})
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-
-
-
-
-
-
                 
               </CardContent>
               <CardFooter className="border-t px-6 py-4">

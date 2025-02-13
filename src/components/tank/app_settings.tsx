@@ -1,9 +1,9 @@
 import { Outlet,Link } from "react-router-dom";
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
 import { useLocation} from 'react-router-dom';
-
+import DialogPut from '@/components/tank/dialog-put'
 
 
 export default function AppSettings() {
@@ -18,13 +18,32 @@ export default function AppSettings() {
   const p_portfolio = location.pathname.split('/')[1]
   const p_setting = location.pathname.split('/')[3]
 
+  const [refresh, setRefresh] = useState(false);
+
+
+   // Function to update the state
+  const refreshAction = () => {
+    setRefresh(prev => !prev); // Toggle the `refresh` state to trigger useEffect
+    console.log(refresh);
+  };
+
 
   return (
     <div className="flex min-h-screen w-full flex-col" key={location.pathname}>
       
       <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
         <div className="mx-auto grid w-full max-w-6xl gap-2">
-          <div className="text-xl font-semibold">Settings for {tree?.portfolios[p_portfolio]?.name} 
+          <div className="text-xl font-semibold group flex items-center gap-1">Settings for {tree?.portfolios[p_portfolio]?.name} 
+            
+                      <DialogPut 
+                        selectedKey='name' 
+                        selectedValue={tree.portfolios[p_portfolio].name} 
+                        refreshUp={refreshAction}
+                        title="Edit Portfolio"
+                        instructions="Modify the Portfolio name and click save."
+                        path={`${import.meta.env.VITE_API_URL}/_auth/portfolios/${p_portfolio}`}
+                        method='PUT'
+                      />  
 
           </div>
           <span className="text-3xl font-semibold"></span>

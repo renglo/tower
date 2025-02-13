@@ -15,14 +15,10 @@ import { CognitoIdentityProviderClient, ForgotPasswordCommand } from '@aws-sdk/c
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
+  const navigate = useNavigate();
 
-
-const handleForgotPassword = async (e: FormEvent<HTMLFormElement>) => {
+  const handleForgotPassword = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const navigate = useNavigate();
-
-
 
     const client = new CognitoIdentityProviderClient({
       region: import.meta.env.VITE_COGNITO_REGION,
@@ -37,7 +33,7 @@ const handleForgotPassword = async (e: FormEvent<HTMLFormElement>) => {
       await client.send(command);
       setStatus('Enter code in next page');
       alert("Code sent to your email");
-      navigate('/confirm');
+      navigate('/reset');
       
     } catch (error) {
       console.error('Error sending password reset code:', error);

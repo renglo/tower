@@ -41,9 +41,9 @@ const ResetPassword = () => {
       setStatus('Success');
       alert("Password reset successful. You can now log in with your new password.");
       navigate('/login');
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error resetting password:', error);
-      setStatus('Failed to reset password.');
+      setStatus(`Invalid password: ${(error as Error).name}`);
     }
   };
 

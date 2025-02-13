@@ -415,9 +415,9 @@ export default function FormPost({ refreshUp, blueprint, path, method }: FormPos
               name={field.name}
               render={({ field: formField }) => (
               <FormItem className="px-1">
-                  <FormLabel>{field.label}</FormLabel>
+                  <FormLabel>{field.label}{field.required ? '*' : ''}</FormLabel>
                   <FormControl>{renderFormField(field, formField, Rich)}</FormControl>
-                  <FormDescription>{/*field.hint*/}</FormDescription>
+                  <FormDescription>{/*<span className='text-xs'>{field.hint}</span>*/}</FormDescription>
                   <FormMessage />
               </FormItem>
               )}

@@ -85,7 +85,7 @@ export default function SettingsTeams() {
               <CardHeader>
                 <CardTitle>Teams</CardTitle>
                 <CardDescription>
-                  A team is a group of people that operate across the organizations in your portfolio. For example, your Accounting team, can create portfolio level reports or analyze an organization in specific. You provide tools to each team according to their function.
+                  A team is a group of people that operate across the organizations in your portfolio.
                 </CardDescription>
               </CardHeader>
               <CardContent>

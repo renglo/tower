@@ -143,7 +143,7 @@ export default function TeamCard({teamdoc,portfolioid}: TeamCardProps) {
                       team_id={teamdoc.team_id} 
                       refreshUp={refreshAction}
                       title= {`Invite a collaborator to team : ${teamdoc.name}`}
-                      instructions="Enter the email to send the invite to" 
+                      instructions="To invite someone, they must first create an account. If their email isn’t registered, the invitation will fail." 
                       path={`${import.meta.env.VITE_API_URL}/_auth/user/invite`}
                       method='POST'
                 />
@@ -176,7 +176,7 @@ export default function TeamCard({teamdoc,portfolioid}: TeamCardProps) {
                           {row.email} <Badge variant="outline">user:{row.user_id}</Badge>
                         </p>
                       </div>
-                      <div className="ml-auto font-medium">
+                      <div className="ml-auto font-medium hidden">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="outline" size="sm" className="h-8 gap-1">
