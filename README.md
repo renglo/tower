@@ -88,12 +88,16 @@ Your code will be untouched as template files will be overriden by your changes.
              |                  └--...as many custom components as the tool might need
              |
              └---/navigation ---┐
-             |                  └--/tool_<tool_name>_sidenav.tsx
-             |                  └--/tool_<tool_name>_sheetnav.tsx
+             |                  └--/<tool_name>_sidenav.tsx
+             |                  └--/<tool_name>_sheetnav.tsx
              |
              └---/pages --------┐
-                                └--/tool_<tool_name>_<page_name>.tsx
-                                └--...as many custom pages as the tool might need
+             |                  └--/<tool_name>_<page_name>.tsx
+             |                  └--...as many custom pages as the tool might need
+             |
+             └---/onboarding ---┐
+                                └--/<tool_name>_<onboarding_name>.tsx
+                                └--...as many onboarding funnels as the tool might need
 
 
 
