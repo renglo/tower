@@ -37,14 +37,10 @@ const isAuthenticated = () => {
   return !!accessToken;
 };
 
-
-
-// BASEURL/<PORTFOLIO_ID>/<ORG_ID>/<APP_ID>/<RING_ID>
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
+    element: <Navigate replace to="/login" />,
   },
   {
     path: "/",

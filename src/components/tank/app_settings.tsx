@@ -65,8 +65,8 @@ export default function AppSettings() {
               to={`/${p_portfolio}/settings/teams`}
               className={
                 p_setting === 'teams'
-                  ? "font-semibold text-primary"  // Active state
-                  : ""
+                  ? "font-semibold text-primary hidden"  // Active state
+                  : "hidden"
               } 
             >Teams</Link>
             <Link 

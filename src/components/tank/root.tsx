@@ -316,7 +316,7 @@ export default function Root() {
               }
       
               <DropdownMenuSeparator />
-              <DropdownMenuItem key="settings">
+              <DropdownMenuItem key="settings" className="hidden">
                 <NavLink to={`/account`} >
                   Account settings
                 </NavLink>

@@ -120,9 +120,9 @@ export default function Account() {
             </Card> 
             <Card>
               <CardHeader>
-                <CardTitle>Install Gartic App</CardTitle>
+                <CardTitle>Create a new Portfolio </CardTitle>
                 <CardDescription>
-                  Click here to initiate the installation process.
+                  New portfolio
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -130,7 +130,7 @@ export default function Account() {
                 <div className="text-xs text-muted-foreground">
                     
                     <Onboarding/>
-                  </div>
+                </div>
                 
               </CardContent>             
             </Card> 

@@ -136,7 +136,7 @@ export default function SettingsTools() {
                 A tool helps your team do something specific in your organization 
               </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="hidden">
                 <DialogPost
                             refreshUp={refreshAction}
                             blueprint={blueprint}
