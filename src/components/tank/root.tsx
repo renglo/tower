@@ -37,8 +37,8 @@ import{
 import { Toaster } from "@/components/ui/toaster"
 import OrgSwitch from "@/components/tank/org-switch"
 import ToolSwitch from "@/components/tank/tool-switch"
-import SideNav from "@/tools/nav"
-import SheetNav from "@/tools/sheetnav"
+import SideNav from "../../nav"
+import SheetNav from "../../sheetnav"
 import { useNavigate,NavLink,useParams,useLocation } from 'react-router-dom'
 import {GlobalContext} from "@/components/tank/global-context"
 

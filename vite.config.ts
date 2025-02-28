@@ -1,6 +1,6 @@
-import path from "path"
 import react from "@vitejs/plugin-react"
 import { defineConfig, loadEnv } from "vite"
+import { fileURLToPath } from 'url'
 
 
 
@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        '@': fileURLToPath(new URL('./src', import.meta.url))
       },
     },
     server: {
@@ -29,14 +29,24 @@ export default defineConfig(({ mode }) => {
       },
       host: '127.0.0.1',
       port: 5173,
+      fs: {
+        // Allow serving files from one level up to the project root
+        allow: ['..'],
+      },
+    },
+    json: {
+      stringify: true
+    },
+    optimizeDeps: {
+      include: ['../tools/**/*.tsx'], // Include external tools directory
+    },
+    build: {
+      commonjsOptions: {
+        include: [/tools/, /node_modules/],
+      },
+      rollupOptions: {
+        external: ['react-router-dom','lucide-react','recharts']
+      },
     },
   };
 });
-
-
-
-
-
-
-
-

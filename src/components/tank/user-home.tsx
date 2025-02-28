@@ -20,7 +20,7 @@ import { useContext } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
 import { NavLink } from "react-router-dom";
 
-import Onboarding from "@/tools/onboarding"
+import Onboarding from "@/onboarding"
 
 interface Portfolio {
   name: string;
@@ -125,7 +125,9 @@ export default function UserHome() {
 
 
           ) : (
+            <div className='flex flex-col gap-4'>
             <Onboarding/>
+            </div>
           )      
 
         ) : (

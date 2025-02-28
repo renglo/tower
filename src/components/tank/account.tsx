@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react';
 
 import DialogPost from "@/components/tank/dialog-post"
 
-import Onboarding from "@/tools/onboarding"
+import Onboarding from "@/onboarding"
 
 
 export const description =
@@ -99,41 +99,32 @@ export default function Account() {
         <div className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">
       
           <div className="grid grid-cols-3 gap-4 ">
-            <Card className="hidden">
+            <Card>
               <CardHeader>
                 <CardTitle>Portfolios </CardTitle>
                 <CardDescription>
-                   A Portfolio is an entity used to group organizations.
+                   Create an empty portfolio
                 </CardDescription>
               </CardHeader>
               <CardContent>
-
-                <DialogPost
-                            refreshUp={refreshAction}
-                            blueprint={blueprint}
-                            title={`Create a new Portfolio`}
-                            instructions="Enter the name of the portfolio, you'll be able to add more information about it later"
-                            path={`${import.meta.env.VITE_API_URL}/_auth/portfolios`}
-                            method='POST'
-                />
-              </CardContent>             
-            </Card> 
-            <Card>
-              <CardHeader>
-                <CardTitle>Create a new Portfolio </CardTitle>
-                <CardDescription>
-                  New portfolio
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-
-                <div className="text-xs text-muted-foreground">
-                    
-                    <Onboarding/>
+                <div className="text-xs text-muted-foreground"> 
+                  <DialogPost
+                              refreshUp={refreshAction}
+                              blueprint={blueprint}
+                              title={`Create a new Portfolio`}
+                              instructions="Enter the name of the portfolio, you'll be able to add more information about it later"
+                              path={`${import.meta.env.VITE_API_URL}/_auth/portfolios`}
+                              method='POST'
+                              buttontext='Create new'
+                  />
                 </div>
-                
               </CardContent>             
             </Card> 
+
+
+            
+            <Onboarding/>
+            
           </div>
           <button onClick={refreshTree} className="flex items-center">
                       <RefreshCcw className="h-2 w-2" />

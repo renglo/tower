@@ -20,7 +20,7 @@ import ResetPassword from '@/components/tank/authResetPassword.tsx';
 
 import Landing from './landing/Landing.tsx';
 
-import ToolRouter from "@/tools/router"
+import ToolRouter from "@/router.tsx"
 
 import AppSettings from "@/components/tank/app_settings"
 import SettingsTeams from "@/components/tank/settings-teams"
