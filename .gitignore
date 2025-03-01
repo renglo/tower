@@ -31,3 +31,10 @@ dist-ssr
 *.tsbuildinfo
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
+
+# Logo
+small_logo.jpg
+large_logo.jpg
+
+# Mac stuff
+.DS_Store

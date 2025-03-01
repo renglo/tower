@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react"
 import { defineConfig, loadEnv } from "vite"
 import { fileURLToPath } from 'url'
+//import path from 'path'
 
 
 
@@ -15,7 +16,9 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        //'@tools': path.resolve(__dirname, './tools'),
+        '@tools': "../tools"
       },
     },
     server: {
@@ -31,21 +34,25 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       fs: {
         // Allow serving files from one level up to the project root
-        allow: ['..'],
+        allow: ['../tools','..','../tools/*'],
+        strict:false
       },
     },
     json: {
       stringify: true
     },
     optimizeDeps: {
-      include: ['../tools/**/*.tsx'], // Include external tools directory
+      include: [
+        '../tools/**/*.tsx',
+        'react-router-dom'
+      ],
     },
     build: {
       commonjsOptions: {
         include: [/tools/, /node_modules/],
       },
       rollupOptions: {
-        external: ['react-router-dom','lucide-react','recharts']
+        external: []
       },
     },
   };

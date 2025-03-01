@@ -5,7 +5,7 @@ import toolsConfig from '@/tools.json';
 // Import tool components dynamically
 const importTool = (tool: string) => {
     return lazy(() => 
-        import(`../tools/${tool}/ui/${tool}.tsx`)
+        import(`@tools/${tool}/ui/${tool}.tsx`)
             .catch(() => {
                 // Return a simple component if import fails
                 return {

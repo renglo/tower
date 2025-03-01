@@ -4,7 +4,7 @@ import toolsConfig from '@/tools.json';
 // Import onboarding component dynamically
 const importOnboarding = (tool: string) => {
     return lazy(() => 
-        import(`../tools/${tool}/ui/onboarding/${tool}_onboarding.tsx`)
+        import(`@tools/${tool}/ui/onboarding/${tool}_onboarding.tsx`)
             .catch(() => {
                 console.log(`${tool} :Not found`)
                 return {

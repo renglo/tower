@@ -84,6 +84,7 @@ export default function AuthLogin() {
               //This is where user is redirected after successful login
               // We use window.location.href as it is more flexible."
               // Using windlow.location will cause that anything in the GlobalContext to reset. 
+              console.log('redirecting to /home');
               
               window.location.href = `/home`;
 

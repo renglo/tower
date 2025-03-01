@@ -5,7 +5,7 @@ import toolsConfig from '@/tools.json';
 // Import tool components dynamically with error handling
 const importToolSheetNav = (tool: string) => {
     return lazy(() => 
-        import(`../tools/${tool}/ui/navigation/${tool}_sheetnav.tsx`)
+        import(`@tools/${tool}/ui/navigation/${tool}_sheetnav.tsx`)
             .catch(() => {
                 // Return a simple component if import fails
                 return {

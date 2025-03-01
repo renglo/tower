@@ -6,7 +6,7 @@ import toolsConfig from '@/tools.json';
 const importToolNav = (tool: string) => {
   // Use relative path from the current directory
   return lazy(() => 
-    import(`../tools/${tool}/ui/navigation/${tool}_sidenav.tsx`)
+    import(`@tools/${tool}/ui/navigation/${tool}_sidenav.tsx`)
         .catch((error) => {
             console.log(`${tool} :E `, error);
             // Return a simple component if import fails
