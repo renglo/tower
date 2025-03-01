@@ -123,7 +123,7 @@ export default function Account() {
 
 
             
-            {/* <Onboarding/> */}
+            <Onboarding/>
             
           </div>
           <button onClick={refreshTree} className="flex items-center">
