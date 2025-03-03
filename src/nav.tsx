@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toolsConfig from '@/tools.json';
 
 // Import tool components dynamically
@@ -23,24 +24,31 @@ interface SideNavProps {
     ring?: string;
 }
 
-export default function SideNav({portfolio, org, tool, ring}: SideNavProps) {   
+export default function SideNav({portfolio, org, tool, ring}: SideNavProps) {  
+    
+    const navigate = useNavigate();
     
     // Only render if tool exists in config
     if (!tool || !(tool in toolsConfig['tools'])) {
         return null;
     }
 
+    const handleNavigation = (path: string) => {
+        navigate(path);
+      };
+
     // Dynamically load the tool component
     const ToolNavComponent = importToolNav(tool);
        
     return (
-        <Suspense fallback={<div></div>}>
-            <ToolNavComponent 
-                portfolio={portfolio} 
-                org={org}
-                tool={tool}
-                ring={ring} 
-            />
+        <Suspense fallback={<div></div>}>          
+                <ToolNavComponent 
+                    portfolio={portfolio} 
+                    org={org}
+                    tool={tool}
+                    ring={ring}
+                    onNavigate={handleNavigation}
+                /> 
         </Suspense>
     );
 }

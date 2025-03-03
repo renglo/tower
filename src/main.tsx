@@ -1,8 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter,
+  Routes,
+  Route,
   Navigate,
 } from "react-router-dom";
 import Root from '@/components/tank/root'
@@ -37,99 +38,38 @@ const isAuthenticated = () => {
   return !!accessToken;
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Navigate replace to="/login" />,
-  },
-  {
-    path: "/",
-    element: isAuthenticated() ? <Root /> : <Navigate replace to="/login" />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/home",
-        element: isAuthenticated() ? <UserHome /> : <Navigate replace to="/login" />,
-      },
-      {
-        path: "/account",
-        element: isAuthenticated() ? <Account /> : <Navigate replace to="/login" />,
-      },
-      {
-        path: ":portfolio/settings",
-        element: isAuthenticated() ? <AppSettings /> : <Navigate replace to="/login" />,
-        children: [
-          {
-            path: "",
-            element: <SettingsTools />,
-          },
-          {
-            path: "teams",
-            element: <SettingsTeams />,
-          },        
-          {
-            path: "orgs",
-            element: <SettingsOrgs />,
-          },
-          {
-            path: "tools",
-            element: <SettingsTools />,
-          },
-          {
-            path: "portfolios",
-            element: <SettingsHome />,
-          }
-          // Add more nested routes as needed
-        ],
-      },
-      {
-        path: "/:portfolio/:org/:tool",
-        element: isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />,
-        //element: isAuthenticated() ? getComponentByTool(tool) : <Navigate replace to="/login" />,
-      },
-      {
-        path: "/:portfolio/:org/:tool/:ring",
-        element: isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />,
-        //element: isAuthenticated() ? getComponentByTool(tool) : <Navigate replace to="/login" />,
-      },
-    ],
-  },
-  {
-    path: "/login",
-    element: <AuthLogin />,
-  },
-  {
-    path: "/register",
-    element: <AuthRegister />,
-  },
-  {
-    path: "/confirm",
-    element: <AuthConfirm />,
-  },
-  {
-    path: "/forgot",
-    element: <ForgotPassword />,
-  },
-  {
-    path: "/reset",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/invite",
-    element: <AuthInvite />,
-  },
-  {
-    path: "/landing",
-    element: <Landing />,
-  }
-]);
-
-
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GlobalProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route 
+            path="/" 
+            element={isAuthenticated() ? <Root /> : <Navigate replace to="/login" />}
+            errorElement={<ErrorPage />}
+          >
+            <Route path="/home" element={isAuthenticated() ? <UserHome /> : <Navigate replace to="/login" />} />
+            <Route path="/account" element={isAuthenticated() ? <Account /> : <Navigate replace to="/login" />} />
+            <Route path=":portfolio/settings" element={isAuthenticated() ? <AppSettings /> : <Navigate replace to="/login" />}>
+              <Route index element={<SettingsTools />} />
+              <Route path="teams" element={<SettingsTeams />} />
+              <Route path="orgs" element={<SettingsOrgs />} />
+              <Route path="tools" element={<SettingsTools />} />
+              <Route path="portfolios" element={<SettingsHome />} />
+            </Route>
+            <Route path=":portfolio/:org/:tool" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
+            <Route path=":portfolio/:org/:tool/:ring" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
+          </Route>
+          <Route path="/login" element={<AuthLogin />} />
+          <Route path="/register" element={<AuthRegister />} />
+          <Route path="/confirm" element={<AuthConfirm />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
+          <Route path="/invite" element={<AuthInvite />} />
+          <Route path="/landing" element={<Landing />} />
+        </Routes>
+      </BrowserRouter>
     </GlobalProvider>
   </StrictMode>,
 )
