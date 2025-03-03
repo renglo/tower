@@ -38,9 +38,9 @@ interface ItemPreviewProps {
   refreshUp: () => void;         
   onDeleteId: (id: string) => void; 
   blueprint?: any;
-  portfolio_id: string;
-  org_id: string;
-  ring_id: string;               
+  portfolio: string;
+  org: string;
+  ring: string;               
 }
 
 
@@ -66,7 +66,7 @@ interface BlueprintField {
 }
 
   
-export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,portfolio_id,org_id,ring_id}: ItemPreviewProps) {
+export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,portfolio,org,ring}: ItemPreviewProps) {
 
 
     //const [data, setData] = useState({}); // State to hold table data
@@ -86,7 +86,7 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
             console.log('About to fetch');
             
             // Fetch Data
-            const dataResponse = await fetch(`${import.meta.env.VITE_API_URL}/_data/${portfolio_id}/${org_id}/${ring_id}/${selectedId}`, {
+            const dataResponse = await fetch(`${import.meta.env.VITE_API_URL}/_data/${portfolio}/${org}/${ring}/${selectedId}`, {
                 method: 'GET',
                 headers: {
                 'Authorization': `Bearer ${sessionStorage.accessToken}`,
@@ -255,7 +255,7 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
                                 blueprint={blueprint}
                                 title="Edit attribute"
                                 instructions="Modify the attribute and click save."
-                                path={`${import.meta.env.VITE_API_URL}/_data/${portfolio_id}/${org_id}/${ring_id}/${selectedId}`}
+                                path={`${import.meta.env.VITE_API_URL}/_data/${portfolio}/${org}/${ring}/${selectedId}`}
                                 method='PUT'
                             />
                             {typeof value === 'object' && value !== null ? JSON.stringify(value) : blueprint?.rich?.[blueprint.sources?.[key]?.split(':')[0]]?.[value] ?? value}

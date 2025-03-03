@@ -1,5 +1,4 @@
 import { lazy, Suspense } from 'react';
-import { useLocation } from "react-router-dom";
 import toolsConfig from '@/tools.json';
 
 // Import tool components dynamically
@@ -20,11 +19,11 @@ const importToolNav = (tool: string) => {
 interface SideNavProps {
     portfolio: string;
     org: string;
+    tool?: string;
+    ring?: string;
 }
 
-export default function SideNav({portfolio, org}: SideNavProps) {   
-    const location = useLocation();
-    const tool = location.pathname.split('/')[3];
+export default function SideNav({portfolio, org, tool, ring}: SideNavProps) {   
     
     // Only render if tool exists in config
     if (!tool || !(tool in toolsConfig['tools'])) {
@@ -36,7 +35,12 @@ export default function SideNav({portfolio, org}: SideNavProps) {
        
     return (
         <Suspense fallback={<div></div>}>
-            <ToolNavComponent portfolio={portfolio} org={org} />
+            <ToolNavComponent 
+                portfolio={portfolio} 
+                org={org}
+                tool={tool}
+                ring={ring} 
+            />
         </Suspense>
     );
 }

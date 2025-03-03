@@ -40,7 +40,6 @@ import {
 } from "@/components/ui/table"
 
 
-
 function generateReactType(fields:any) {
 
   console.log('Field to be filtered (GRT)')
@@ -383,7 +382,11 @@ const tableFooter = {
 interface DataTableProps {
   onSelectId: (id: string) => void;  
   refresh: any;              
-  blueprint: any;             
+  blueprint: any; 
+  portfolio: string; 
+  org: string; 
+  tool: string; 
+  ring: string;             
 }
 
 
@@ -392,12 +395,13 @@ interface DataItem {
   [key: string]: any; // Adjust this to the specific structure of your data
 }
 
-export default function DataTable({ onSelectId, refresh, blueprint }: DataTableProps) {
+export default function DataTable({ onSelectId, refresh, blueprint, portfolio, org, tool, ring  }: DataTableProps) {
 
   let columnDefs = []; 
 
   console.log('BLUEPRINT 111')
   console.log(blueprint);
+  console.log(tool);
 
   // Add Definitions to ColumnDef
   // Assuming generateReactType generates an object type from fields
@@ -413,11 +417,10 @@ export default function DataTable({ onSelectId, refresh, blueprint }: DataTableP
   //const [loading, setLoading] = useState(true); // State to manage loading status
   const [error, setError] = useState<Error | null>(null);
 
-  const portfolio_id = location.pathname.split('/')[1];
-  const org_id = location.pathname.split('/')[2];
-  //const app_id = location.pathname.split('/')[3];
-  const ring_id = location.pathname.split('/')[4]
-
+  const portfolio_id = portfolio
+  const org_id = org
+  //const tool_id = tool
+  const ring_id = ring
 
 
   useEffect(() => {
@@ -542,7 +545,7 @@ export default function DataTable({ onSelectId, refresh, blueprint }: DataTableP
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id}> 
                       {header.isPlaceholder
                         ? null
                         : flexRender(

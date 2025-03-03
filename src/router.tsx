@@ -17,7 +17,16 @@ const importTool = (tool: string) => {
 
 export default function ToolRouter() {
     const location = useLocation();
-    const tool = location.pathname.split('/')[3];
+    console.log('Router :',location)
+    const pathSegments = location.pathname.split('/');
+    const portfolio = pathSegments[1] || null;
+    const org = pathSegments[2] || null;
+    const tool = pathSegments[3] || null;
+    const ring = pathSegments[4] || null;
+
+    console.log('Portfolio/Org/Tool/Ring',portfolio,org,tool,ring);
+    
+
 
     // Only render if tool exists in config
     if (!tool || !(tool in toolsConfig['tools'])) {
@@ -29,7 +38,12 @@ export default function ToolRouter() {
        
     return (
         <Suspense fallback={<div></div>}>
-            <ToolComponent />
+            <ToolComponent
+                portfolio={portfolio}
+                org={org}
+                tool={tool}
+                ring={ring}
+             />
         </Suspense>
     );
 }

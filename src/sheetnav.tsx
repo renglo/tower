@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { useLocation } from "react-router-dom";
 import toolsConfig from '@/tools.json';
+import { WindowSizeProvider } from '@/contexts/WindowSizeContext';
 
 // Import tool components dynamically with error handling
 const importToolSheetNav = (tool: string) => {
@@ -18,11 +18,11 @@ const importToolSheetNav = (tool: string) => {
 interface SheetNavProps {
     portfolio: string;
     org: string;
+    tool: string;
+    ring: string;
 }
 
-export default function SheetNav({portfolio, org}: SheetNavProps) {   
-    const location = useLocation();
-    const tool = location.pathname.split('/')[3];
+export default function SheetNav({portfolio, org, tool, ring}: SheetNavProps) {   
     
     // Only render if tool exists in config
     if (!tool || !(tool in toolsConfig['tools'])) {
@@ -33,8 +33,17 @@ export default function SheetNav({portfolio, org}: SheetNavProps) {
     const ToolSheetNavComponent = importToolSheetNav(tool);
        
     return (
-        <Suspense fallback={<div></div>}>
-            <ToolSheetNavComponent portfolio={portfolio} org={org} />
-        </Suspense>
+        <div className="contents">
+            <Suspense fallback={<div></div>}>
+                <WindowSizeProvider>
+                    <ToolSheetNavComponent 
+                        portfolio={portfolio} 
+                        org={org} 
+                        tool={tool} 
+                        ring={ring} 
+                    />
+                </WindowSizeProvider>
+            </Suspense>
+        </div>
     );
 }

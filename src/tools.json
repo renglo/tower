@@ -1,8 +1,8 @@
 {
   "tools":{
     "data": "1.0.0",
-    "schd": "1.0.0",
-    "gartic": "1.0.0"
+    "schd":"1.0.0",
+    "gartic":"1.0.0"
   },
-  "bootstrap":"gartic"
+  "bootstrap":""
 }

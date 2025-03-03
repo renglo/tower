@@ -53,7 +53,7 @@ export default function Root() {
   }
   const { user, loadUser, tree, loadTree } = context;
   
-  const { portfolio, org } = useParams(); // Extract the 'route' parameter from the URL
+  const { portfolio, org, tool, ring } = useParams(); // Extract the 'route' parameter from the URL
   const [refresh, setRefresh] = useState(false);
   const location = useLocation();
 
@@ -160,6 +160,8 @@ export default function Root() {
         <SideNav
             portfolio={`${portfolio}`} 
             org={`${org}`} 
+            tool={`${tool}`} 
+            ring={`${ring}`} 
          />
 
         <nav 
@@ -194,8 +196,10 @@ export default function Root() {
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           
           <SheetNav
-            portfolio={`${portfolio}`} 
-            org={`${org}`} 
+            portfolio={`${portfolio}`}
+            org={`${org}`}
+            tool={`${tool}`}
+            ring={`${ring}`}
           />
             
 
@@ -278,42 +282,40 @@ export default function Root() {
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Switch Portfolio</DropdownMenuLabel>
 
-              {
-                (tree.portfolios && Object.keys(tree.portfolios).length > 0) ? (
-                    Object.values(tree.portfolios).map((row) => (
-                      <DropdownMenuItem key={row['portfolio_id']}>
-
-                        <div 
-                          className={
-                            location.pathname.split('/')[1] === row['portfolio_id']
-                              ? "font-bold"  // Apply bold text when condition is met
-                              : ""
-                          }
-                        >
-                          <div 
-                            className="flex items-center gap-2 flex-row"
-                            onClick={() => handleClick(`/${row['portfolio_id']}/settings/tools`)}
-                          >
-                            <Avatarsq>
-                              <AvatarsqImage src='' />
-                              <AvatarsqFallback>1a</AvatarsqFallback>
-                            </Avatarsq>
-                            {row['name']}
-                          </div>
-                        </div>
-
-
-
-                      </DropdownMenuItem>
-                    ))
-                ) : (
-                  <DropdownMenuItem>
-                    <div className="flex items-center gap-2 flex-row">
-                      <div className="text-xs text-muted-foreground">No Portfolio</div>
+              {!tree ? (
+                <DropdownMenuItem>
+                  <span className="text-xs text-muted-foreground">Could not load portfolios</span>
+                </DropdownMenuItem>
+              ) : (tree.portfolios && Object.keys(tree.portfolios).length > 0) ? (
+                Object.values(tree.portfolios).map((row) => (
+                  <DropdownMenuItem key={row['portfolio_id']}>
+                    <div 
+                      className={
+                        location.pathname.split('/')[1] === row['portfolio_id']
+                          ? "font-bold"
+                          : ""
+                      }
+                    >
+                      <div 
+                        className="flex items-center gap-2 flex-row"
+                        onClick={() => handleClick(`/${row['portfolio_id']}/settings/tools`)}
+                      >
+                        <Avatarsq>
+                          <AvatarsqImage src='' />
+                          <AvatarsqFallback>1a</AvatarsqFallback>
+                        </Avatarsq>
+                        {row['name']}
+                      </div>
                     </div>
                   </DropdownMenuItem>
-                )
-              }
+                ))
+              ) : (
+                <DropdownMenuItem>
+                  <div className="flex items-center gap-2 flex-row">
+                    <div className="text-xs text-muted-foreground">No Portfolio</div>
+                  </div>
+                </DropdownMenuItem>
+              )}
       
               <DropdownMenuSeparator />
               <DropdownMenuItem key="settings" className="hidden">
@@ -326,7 +328,13 @@ export default function Root() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <Outlet />
+        {!tree ? (
+          <div className="flex items-center justify-center h-full">
+            <span className="text-muted-foreground">Could not load authorization tree for this user.</span>
+          </div>
+        ) : (
+          <Outlet />
+        )}
         <Toaster />
       </div>
     </div>

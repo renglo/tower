@@ -88,7 +88,7 @@ const router = createBrowserRouter([
         //element: isAuthenticated() ? getComponentByTool(tool) : <Navigate replace to="/login" />,
       },
       {
-        path: "/:portfolio/:org/:tool/:page",
+        path: "/:portfolio/:org/:tool/:ring",
         element: isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />,
         //element: isAuthenticated() ? getComponentByTool(tool) : <Navigate replace to="/login" />,
       },

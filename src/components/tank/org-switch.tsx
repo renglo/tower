@@ -73,10 +73,10 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
             <>
             <Avatarsq>
                 <AvatarsqImage src={`${import.meta.env.VITE_API_URL}/_docs/${p_portfolio}/${selectedOrg}/_thumbnails/${selectedOrg}.png`} />
-                <AvatarsqFallback>{tree?.portfolios[p_portfolio]?.orgs[selectedOrg]?.handle.substring(0, 3)}</AvatarsqFallback>
+                <AvatarsqFallback></AvatarsqFallback>
             </Avatarsq>
             
-            <span className="text-xxs ">{tree?.portfolios[p_portfolio]?.orgs[selectedOrg]?.name}</span>
+             <span className="text-xxs ">{tree && 'portfolios' in tree ? tree?.portfolios[p_portfolio]?.orgs[selectedOrg]?.name : ''}</span>
             </>
             ) : (
             <span className="text-xxs ">Select One</span>
