@@ -149,7 +149,7 @@ export default function AuthLogin() {
                       </Button>
                   </form>
               </div>
-              <div className="mt-4 text-center text-sm">
+              <div className="mt-4 text-center text-sm hidden">
                   Don&apos;t have an account?{" "}
                   <a href="/register" className="underline">
                   Create one here
@@ -159,7 +159,7 @@ export default function AuthLogin() {
           </div>
           <div className="hidden bg-muted lg:block h-full w-full">
               <img
-              src={`${import.meta.env.VITE_WL_LOGO}`}
+              src={`${import.meta.env.VITE_WL_LOGIN}`}
               alt="Img"
               
               className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"

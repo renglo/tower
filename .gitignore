@@ -36,5 +36,5 @@ tsconfig.node.tsbuildinfo
 small_logo.jpg
 large_logo.jpg
 
-# Mac stuff
-.DS_Store
+# Configuration files
+tools.json

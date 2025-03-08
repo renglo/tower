@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import toolsConfig from '@/tools.json';
+import { GlobalContext } from "@/components/tank/global-context"
 
 // Import onboarding component dynamically
 const importOnboarding = (tool: string) => {
@@ -15,6 +16,13 @@ const importOnboarding = (tool: string) => {
 };
 
 export default function Onboarding() {   
+
+    const context = useContext(GlobalContext);
+    if (!context) {
+        throw new Error('No GlobalProvider');
+    }
+    const { tree } = context;
+
     // Find the tool with bootstrap=true
     const bootstrapTool = toolsConfig['bootstrap'];
     
@@ -27,7 +35,7 @@ export default function Onboarding() {
            
     return ( 
         <Suspense fallback={<div></div>}>
-            <OnboardingComponent />
+            <OnboardingComponent tree={tree} />
         </Suspense>    
     )
 }

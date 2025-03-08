@@ -120,8 +120,6 @@ export default function Account() {
                 </div>
               </CardContent>             
             </Card> 
-
-
             
             <Onboarding/>
             
