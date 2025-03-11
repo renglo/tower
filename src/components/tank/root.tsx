@@ -318,11 +318,19 @@ export default function Root() {
               )}
       
               <DropdownMenuSeparator />
-              <DropdownMenuItem key="settings" className="hidden">
+              <DropdownMenuItem key="token" className="hidden">
+                <NavLink to={`/token`} >
+                  API Token
+                </NavLink>
+              </DropdownMenuItem>
+
+              
+              <DropdownMenuItem key="settings" className="">
                 <NavLink to={`/account`} >
                   Account settings
                 </NavLink>
               </DropdownMenuItem>
+
               <DropdownMenuItem key="logout" onClick={handleLogout}>Logout</DropdownMenuItem>
               
             </DropdownMenuContent>

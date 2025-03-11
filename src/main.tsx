@@ -29,6 +29,7 @@ import SettingsTools from "@/components/tank/settings-tools"
 import SettingsOrgs from "@/components/tank/settings-orgs"
 import SettingsHome from "@/components/tank/settings-home"
 import UserHome from "@/components/tank/user-home"
+import Token from "@/components/tank/token"
 
 import './index.css'
 
@@ -68,6 +69,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/invite" element={<AuthInvite />} />
           <Route path="/landing" element={<Landing />} />
+          <Route path="/token" element={<Token />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>

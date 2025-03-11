@@ -480,7 +480,7 @@ export default function DataTable({ onSelectId, refresh, blueprint, portfolio, o
     };
 
     fetchData();
-  }, [blueprint,refresh]);
+  }, [blueprint,org,refresh]);
 
   //console.log(blueprint)
   //console.log(data)
