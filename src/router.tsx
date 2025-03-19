@@ -1,6 +1,27 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import { useParams } from "react-router-dom";
+import { GlobalContext } from "@/components/tank/global-context"
 import toolsConfig from '@/tools.json';
+
+
+interface Portfolio {
+    name: string;
+    portfolio_id: string;
+    orgs: Record<string, Org>;
+    tools: Record<string, Tool>;
+  }
+  
+interface Org {
+    name: string;
+    org_id: string;
+    tools: string[];
+}
+
+interface Tool {
+    name: string;
+    handle: string;
+}
+
 
 // Import tool components dynamically
 const importTool = (tool: string) => {
@@ -16,17 +37,22 @@ const importTool = (tool: string) => {
 };
 
 export default function ToolRouter() {
-    //const location = useLocation();
-    //console.log('Router :',location)
-    //const pathSegments = location.pathname.split('/');
-    //const portfolio = pathSegments[1] || null;
-    //const org = pathSegments[2] || null;
-    //const tool = pathSegments[3] || null;
-    //const ring = pathSegments[4] || null;
 
     const { portfolio, org, tool, ring } = useParams();
 
-    console.log('Portfolio/Org/Tool/Ring',portfolio,org,tool,ring);
+    // Handle case when context might be undefined
+    const context = useContext(GlobalContext);
+
+    if (!context) {
+        throw new Error("No GlobalProvider");
+    }
+    const { tree } = context as unknown as { tree: { portfolios: Record<string, Portfolio> } };
+
+    const tool_id = tree.portfolios[portfolio]?.orgs[org]?.tools?.
+        find(toolId => tree.portfolios[portfolio]?.tools[toolId]?.handle === tool);
+
+
+    console.log('Router : Portfolio/Org/Tool/Ring',portfolio,org,tool_id,ring);
 
 
     // Only render if tool exists in config
@@ -42,8 +68,9 @@ export default function ToolRouter() {
             <ToolComponent
                 portfolio={portfolio}
                 org={org}
-                tool={tool}
+                tool={tool_id}
                 ring={ring}
+                tree = {tree}
              />
         </Suspense>
     );
