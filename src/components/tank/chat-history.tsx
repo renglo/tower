@@ -1,0 +1,50 @@
+import {
+    Plus,
+    History,
+} from "lucide-react"
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu"
+
+import { Button } from "@/components/ui/button"
+
+export default function ChatHistory({history,actionUp}) {
+
+
+    return (
+        <>
+            <Button variant="ghost" className="">
+                    <span className="sr-only">Chat History</span>
+                    <Plus className="h-8 w-8" />
+            </Button>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="">
+                    <span className="sr-only">Chat History</span>
+                    <History className="h-8 w-8" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Chat History</DropdownMenuLabel>
+                        {history?.items?.map((item) => (
+                            <DropdownMenuItem key={item._id} onClick={() => actionUp(item._id)}>
+                                {new Date(parseFloat(item.time) * 1000).toLocaleString()}
+                            </DropdownMenuItem>
+                        ))}
+                    <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                            New chat
+                        </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </>
+
+    
+  )
+}
