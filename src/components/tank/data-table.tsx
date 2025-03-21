@@ -536,7 +536,7 @@ export default function DataTable({ onSelectId, refresh, blueprint, portfolio, o
 
 
   return (
-    <div className="w-full">
+    <div className="w-full h-[calc(100vh-300px)] overflow-y-auto">
       
       <div>
         <Table>
@@ -589,7 +589,7 @@ export default function DataTable({ onSelectId, refresh, blueprint, portfolio, o
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4 hidden">
+      <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
