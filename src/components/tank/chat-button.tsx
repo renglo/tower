@@ -6,7 +6,7 @@ import {
 interface ButtonProps {
   path: string;
   method: string;
-  messageUp: () => void;
+  messageUp: (response: any) => void;
   payload?: {};
 }
 

@@ -48,8 +48,12 @@ export default function ToolRouter() {
     }
     const { tree } = context as unknown as { tree: { portfolios: Record<string, Portfolio> } };
 
+    if (!portfolio || !org) {
+        return null;
+    }
+
     const tool_id = tree.portfolios[portfolio]?.orgs[org]?.tools?.
-        find(toolId => tree.portfolios[portfolio]?.tools[toolId]?.handle === tool);
+        find((toolId: string) => tree.portfolios[portfolio]?.tools[toolId]?.handle === tool);
 
 
     console.log('Router : Portfolio/Org/Tool/Ring',portfolio,org,tool_id,ring);

@@ -14,7 +14,17 @@ import {
 
 import { Button } from "@/components/ui/button"
 
-export default function ChatHistory({history,actionUp}) {
+interface ThreadItem {
+  _id: string;
+  time: string;
+}
+
+interface ChatHistoryProps {
+  history: { items: ThreadItem[] };
+  actionUp: (id: string) => void;
+}
+
+export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
 
 
     return (

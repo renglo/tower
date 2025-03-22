@@ -345,6 +345,7 @@ export default function Root() {
             <Outlet />
           )}
         </div>
+        <Toaster />
       </div>
     </div>
   )
