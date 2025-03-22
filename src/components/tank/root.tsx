@@ -141,7 +141,7 @@ export default function Root() {
 
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+    <div className="flex h-screen w-full flex-col bg-muted/40 overflow-hidden">
       <aside 
         className="fixed inset-y-0 left-0 z-10 hidden w-16 flex-col border-r bg-background sm:flex"
         >
@@ -192,7 +192,7 @@ export default function Root() {
           </TooltipProvider>
         </nav>
       </aside>
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+      <div className="flex flex-col sm:gap-1 sm:py-1 sm:pl-14">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           
           <SheetNav
@@ -336,14 +336,15 @@ export default function Root() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        {!tree ? (
-          <div className="flex items-center justify-center h-full">
-            <span className="text-muted-foreground">Could not load authorization tree for this user.</span>
-          </div>
-        ) : (
-          <Outlet />
-        )}
-        <Toaster />
+        <div className="flex-1 overflow-auto">
+          {!tree ? (
+            <div className="flex items-center justify-center h-full">
+              <span className="text-muted-foreground">Could not load authorization tree for this user.</span>
+            </div>
+          ) : (
+            <Outlet />
+          )}
+        </div>
       </div>
     </div>
   )
