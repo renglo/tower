@@ -7,7 +7,7 @@ interface WebSocketPayload {
   handler?: string;
   entity_type?: string;
   entity_id?: string;
-  thread_id?: string;
+  thread?: string;
   portfolio?: string;
   org?: string;
 }
@@ -66,7 +66,7 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
             handler: payload.handler, 
             entity_type: payload.entity_type,
             entity_id: payload.entity_id,
-            thread_id: payload.thread_id,
+            thread: payload.thread,
             portfolio: payload.portfolio,
             org: payload.org
           };

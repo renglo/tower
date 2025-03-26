@@ -1,18 +1,26 @@
 import {
-    Send,
+    Snail,
 } from "lucide-react"
 
+interface ChatPayload {
+  action?: string;
+  data?: string;
+  [key: string]: any;
+}
 
 interface ButtonProps {
   path: string;
   method: string;
   messageUp: (response: any) => void;
-  payload?: {};
+  message: string;
+  payload?: ChatPayload;
 }
 
-export default function ChatButton({ path, method, messageUp, payload = {} }: ButtonProps) {
+export default function ChatButton({ path, method, messageUp, message, payload = {} }: ButtonProps) {
 
   // Function to handle button click
+  payload['action'] = 'message'
+  payload['data'] = message
   const handleGoClick = async () => {
     try {
       let response;
@@ -52,7 +60,7 @@ export default function ChatButton({ path, method, messageUp, payload = {} }: Bu
 
   return (
     
-        <Send onClick={handleGoClick} className="h-5 w-5" />
+        <Snail onClick={handleGoClick} className="h-5 w-5" />
         
   )
 }

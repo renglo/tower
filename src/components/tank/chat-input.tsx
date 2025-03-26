@@ -1,4 +1,5 @@
 import WebSocketButton from "@/components/tank/websocket-button"
+import ChatButton from "@/components/tank/chat-button"
 import { TextareaBadges } from "@/components/ui/textareabadges"
 import { useState} from 'react';
 
@@ -40,6 +41,13 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                 messageReset={messageReset}
                 message={unsentMessage}
                 payload={payload}
+            />
+            <ChatButton
+                  path={`${import.meta.env.VITE_API_URL}/_schd/run/${payload['handler']}`}
+                  method='POST'
+                  messageUp={messageUp}
+                  message={unsentMessage}
+                  payload={payload}
             />
             
         </div>
