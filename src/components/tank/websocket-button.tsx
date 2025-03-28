@@ -36,8 +36,13 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
         };
     
         socket.onmessage = (event) => {
-          console.log("Received message:", event.data);
-          messageUp(event.data);
+          console.log("Received message:", event.data); 
+          const msg = {
+            "type":'rs',
+            "update": JSON.parse(event.data)
+          }
+          messageUp(msg);
+
         };
     
         socket.onerror = (error) => {
@@ -71,8 +76,20 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
             portfolio: payload.portfolio,
             org: payload.org
           };
+
+          const msg = {
+            "type":'rq',
+            "doc":{
+              "message":message,
+              "author_id":sessionStorage.cu_handle,
+              "time": Math.floor(Date.now() / 1000),
+              "output":''
+            }
+          }
+
           ws.send(JSON.stringify(ws_payload));
           messageReset(true);
+          messageUp(msg);
         } else {
           console.error("WebSocket is not connected.");
           messageReset(false)
