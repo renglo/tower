@@ -33,7 +33,7 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                     portfolio: captions['portfolio_name'],
                     org: captions['org_name'],
                     thread: captions['activeThread']
-            }}
+                }}
             /> 
          
             <WebSocketButton

@@ -23,16 +23,17 @@ interface ButtonProps {
 export default function WebSocketButton({messageUp,messageReset,message,payload = {} as WebSocketPayload}: ButtonProps) {
 
     const [ws, setWs] = useState<WebSocket | null>(null);
-    //const [input, setInput] = useState<string>("");
+    const [isConnecting, setIsConnecting] = useState(false);
 
-    useEffect(() => {
-
+    const connectWebSocket = () => {
+        if (isConnecting) return;
+        
+        setIsConnecting(true);
         const socket = new WebSocket(`${import.meta.env.VITE_WEBSOCKET_URL}`);
     
         socket.onopen = () => {
           console.log("WebSocket connected");
-          // Optionally, send an initial message upon connection.
-          // socket.send(JSON.stringify({ action: "init", data: "Hello from client" }));
+          setIsConnecting(false);
         };
     
         socket.onmessage = (event) => {
@@ -42,22 +43,35 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
             "update": JSON.parse(event.data)
           }
           messageUp(msg);
-
         };
     
         socket.onerror = (error) => {
           console.error("WebSocket error:", error);
+          setIsConnecting(false);
         };
     
         socket.onclose = () => {
           console.log("WebSocket disconnected");
+          setIsConnecting(false);
+          // Attempt to reconnect after a delay
+          setTimeout(() => {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+              connectWebSocket();
+            }
+          }, 3000); // Wait 3 seconds before attempting to reconnect
         };
     
         setWs(socket);
+    };
+
+    useEffect(() => {
+        connectWebSocket();
     
         // Clean up the WebSocket connection when the component unmounts
         return () => {
-          socket.close();
+          if (ws) {
+            ws.close();
+          }
         };
     }, []);
 
@@ -92,13 +106,19 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
           messageUp(msg);
         } else {
           console.error("WebSocket is not connected.");
-          messageReset(false)
+          messageReset(false);
+          // Attempt to reconnect if not already connecting
+          if (!isConnecting) {
+            connectWebSocket();
+          }
         }
     };
 
     return (
 
-        <Send onClick={sendMessage} className="h-5 w-5" />
+        <span className="flex items-center">
+          <Send onClick={sendMessage} className="h-5 w-5" />
+        </span>     
         
     )
 }
