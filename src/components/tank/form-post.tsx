@@ -194,7 +194,7 @@ export default function FormPost({ refreshUp, blueprint, path, method }: FormPos
                 {field.options ? (
                   // If field.options exist, map over the options and display SelectItem components
                   Object.entries(field.options).map(([value, label]) => (
-                    <SelectItem key={value} value={value}>
+                    <SelectItem key={value} value={value.includes(':') ? value.split(':')[1] : value}>
                       {label}
                     </SelectItem>
                   ))

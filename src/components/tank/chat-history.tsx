@@ -29,8 +29,8 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
 
     return (
         <>
-            <Button variant="ghost" className="">
-                    <span className="sr-only">Chat History</span>
+            <Button variant="ghost" className="" onClick={() => actionUp('NEW')}>
+                    <span className="sr-only">New Chat</span>
                     <Plus className="h-8 w-8" />
             </Button>
             <DropdownMenu>
