@@ -27,7 +27,7 @@ interface DialogPutProps {
     instructions: string;
 }
 
-export default function DialogPut({ selectedKey, selectedValue, refreshUp, blueprint, path, method, title, instructions }: DialogPutProps) {
+export default function DialogPutWide({ selectedKey, selectedValue, refreshUp, blueprint, path, method, title, instructions }: DialogPutProps) {
 
 
   const [open, setOpen] = useState(false);
@@ -43,14 +43,14 @@ export default function DialogPut({ selectedKey, selectedValue, refreshUp, bluep
       <DialogTrigger asChild>
         <Pencil className="h-5 w-5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[75vw]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
             {instructions}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="h-[300px] w-[375px]  p-6" >
+        <ScrollArea className=" w-[71vw]  p-6" >
           <FormPut  
                 selectedKey={selectedKey} 
                 selectedValue={selectedValue}

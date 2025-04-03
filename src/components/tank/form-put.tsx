@@ -15,7 +15,9 @@ interface FormPutProps {
 interface FieldState {
     key: string;
     value: string;
-  }
+    widget?: string;
+    label?: string;
+}
 
 export default function FormPut({ selectedKey, selectedValue, refreshUp, blueprint, path, method }: FormPutProps) {  
       
@@ -34,11 +36,30 @@ export default function FormPut({ selectedKey, selectedValue, refreshUp, bluepri
     // Populate the field
     useEffect(() => {
 
-        setFieldNow({"key":selectedKey,"value":selectedValue});
+        const obj: FieldState = {
+            key: selectedKey,
+            value: selectedValue,
+            widget: undefined,
+            label: undefined
+        };
+
+        if (blueprint?.fields) {
+            blueprint.fields.forEach((field: { name: string; widget: string; label?: string }) => {
+                if (field.name === selectedKey) {
+                    obj.widget = field.widget;
+                    obj.label = field.label;
+                }
+            });
+        }
+
+
+        setFieldNow(obj);
+
+
         // We are not using the Blueprint. 
         // Sending a key:value pair instead to update one single field.
         // #TO-DO : Use the blueprint to validate the key exists in the blueprint
-        console.log(blueprint);
+        //console.log(blueprint);
         // And that the value is of the type expected.
         
     }, []);
@@ -143,19 +164,36 @@ export default function FormPut({ selectedKey, selectedValue, refreshUp, bluepri
         setFieldNow({"key":selectedKey,"value":event.target.value});
     };
 
+    const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setFieldNow({"key":selectedKey,"value":event.target.value,"widget":"textarea"});
+    };
+
 
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
-                <label>{fieldNow.key}</label>
-                <input 
-                    name={fieldNow.key} 
-                    type="text" 
-                    value={fieldNow.value}
-                    onChange={handleInputChange}
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
-                />
+                <label>{fieldNow.label}</label>
+                
+                {fieldNow.widget != 'textarea' ? (
+                    <input 
+                        name={fieldNow.key} 
+                        type="text" 
+                        value={fieldNow.value}
+                        onChange={handleInputChange}
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                    />
+                ) : (
+                    <textarea
+                        name={fieldNow.key} 
+                        onChange={handleTextareaChange}
+                        rows={12}
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                    >
+                        {fieldNow.value}
+                    </textarea>
+                )}
+
                 <Button>Save</Button>
             </div>            
         </form>
