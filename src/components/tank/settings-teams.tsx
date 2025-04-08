@@ -80,7 +80,7 @@ export default function SettingsTeams() {
 
 
   return (
-          <div className="grid gap-6">
+          <div className="grid gap-6 overflow-y-auto max-h-[calc(100vh-180px)]">
             <Card className="">
               <CardHeader>
                 <CardTitle>Teams</CardTitle>

@@ -139,7 +139,7 @@ export default function Account() {
   };
 
   return (
-        <div className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">
+        <div className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8 overflow-y-auto max-h-[calc(100vh-40px)]">
       
           <div className="grid grid-cols-3 gap-4 ">
             <Card>
@@ -211,9 +211,7 @@ export default function Account() {
             <Onboarding/>
             
           </div>
-          <button onClick={refreshTree} className="flex items-center">
-                      <RefreshCcw className="h-2 w-2" />
-          </button>
+          
         </div>
   )
 }

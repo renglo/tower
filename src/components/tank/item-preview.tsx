@@ -185,7 +185,7 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
 
     <>
       <Card
-        className="overflow-hidden"
+        className="h-full flex flex-col"
       > 
         <CardHeader className="flex flex-row items-start bg-muted/50">
           <div className="grid gap-0.5">
@@ -226,7 +226,7 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
             </DropdownMenu>
           </div>
         </CardHeader>
-        <CardContent className="flex flex-col gap-12 p-6 text-sm">  
+        <CardContent className="flex-1 overflow-y-auto p-6 text-sm">  
 
           {(!selectedId || !showCard) ? (
                 <span>Select an item from the list to see its details</span>
@@ -248,17 +248,20 @@ export default function ItemPreview({selectedId,refreshUp,onDeleteId,blueprint,p
                             {key}:
                         </span>
                         <span className="flex items-center gap-1">
-                            <DialogPut 
-                                selectedKey={key} 
-                                selectedValue={value} 
-                                refreshUp={refreshAction}
-                                blueprint={blueprint}
-                                title="Edit attribute"
-                                instructions="Modify the attribute and click save."
-                                path={`${import.meta.env.VITE_API_URL}/_data/${portfolio}/${org}/${ring}/${selectedId}`}
-                                method='PUT'
-                            />
-                            {typeof value === 'object' && value !== null ? JSON.stringify(value) : blueprint?.rich?.[blueprint.sources?.[key]?.split(':')[0]]?.[value] ?? value}
+                            <span className="h-5 w-5">
+                              <DialogPut 
+                                  selectedKey={key} 
+                                  selectedValue={value} 
+                                  refreshUp={refreshAction}
+                                  blueprint={blueprint}
+                                  title="Edit attribute"
+                                  instructions="Modify the attribute and click save."
+                                  path={`${import.meta.env.VITE_API_URL}/_data/${portfolio}/${org}/${ring}/${selectedId}`}
+                                  method='PUT'   
+                              />
+                            </span>  
+                            <span>{typeof value === 'object' && value !== null ? JSON.stringify(value) : blueprint?.rich?.[blueprint.sources?.[key]?.split(':')[0]]?.[value] ?? value}</span>
+                            
                         </span> 
                     </li>
                 ) : null

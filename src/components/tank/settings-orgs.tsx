@@ -82,7 +82,7 @@ export default function SettingsOrgs() {
 
 
   return (
-          <div className="grid gap-6">
+          <div className="grid gap-1 overflow-y-auto max-h-[calc(100vh-180px)]">
             <Card className="">
               <CardHeader>
                 <CardTitle>Organizations</CardTitle>
