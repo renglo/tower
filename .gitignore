@@ -38,3 +38,6 @@ large_logo.jpg
 
 # Configuration files
 tools.json
+
+# Dev images
+*_dev.jpg

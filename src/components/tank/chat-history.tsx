@@ -1,6 +1,7 @@
 import {
     Plus,
     History,
+    ToyBrick,
 } from "lucide-react"
 
 import {
@@ -29,7 +30,7 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
 
     return (
         <>
-            <Button variant="ghost" className="" onClick={() => actionUp('NEW')}>
+            <Button variant="ghost" className="" onClick={() => actionUp('new_thread')}>
                     <span className="sr-only">New Chat</span>
                     <Plus className="h-8 w-8" />
             </Button>
@@ -53,6 +54,10 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
                         </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
+            <Button variant="ghost" className="" onClick={() => actionUp('new_workspace')}>
+                    <span className="sr-only">New Workspace</span>
+                    <ToyBrick className="h-8 w-8" />
+            </Button>
         </>
 
     
