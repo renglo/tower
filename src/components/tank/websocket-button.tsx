@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 interface WebSocketPayload {
   action?: string;
-  handler?: string;
   entity_type?: string;
   entity_id?: string;
   thread?: string;
@@ -83,7 +82,6 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
             action: payload.action,
             data: message,
             auth: `${sessionStorage.accessToken}`,
-            handler: payload.handler, 
             entity_type: payload.entity_type,
             entity_id: payload.entity_id,
             thread: payload.thread,
