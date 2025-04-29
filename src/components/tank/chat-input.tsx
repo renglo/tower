@@ -14,6 +14,8 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
 
 
     const [unsentMessage, setUnsentMessage] = useState('');
+    const [shouldSend, setShouldSend] = useState(false);
+
 
     const messageReset = (m: boolean) => {
         if(m){
@@ -34,6 +36,12 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                     org: captions['org_name'],
                     thread: captions['activeThread']
                 }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      setShouldSend(prev => !prev);
+                    }
+                  }}
             /> 
          
             <WebSocketButton
@@ -41,6 +49,7 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                 messageReset={messageReset}
                 message={unsentMessage}
                 payload={payload}
+                trigger={shouldSend}
             />
             <span className="hidden">
                 <ChatButton

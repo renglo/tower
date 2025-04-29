@@ -17,9 +17,10 @@ interface ButtonProps {
   messageReset: (value: boolean) => void;
   message: string;
   payload?: WebSocketPayload;
+  trigger?: boolean;
 }
 
-export default function WebSocketButton({messageUp,messageReset,message,payload = {} as WebSocketPayload}: ButtonProps) {
+export default function WebSocketButton({messageUp,messageReset,message,payload = {} as WebSocketPayload, trigger}: ButtonProps) {
 
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [isConnecting, setIsConnecting] = useState(false);
@@ -73,6 +74,12 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
           }
         };
     }, []);
+
+    useEffect(() => {
+        if (trigger) {
+            sendMessage();
+        }
+    }, [trigger]);
 
     const sendMessage = () => {
         if (ws && ws.readyState === WebSocket.OPEN) {
