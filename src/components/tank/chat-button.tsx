@@ -12,17 +12,19 @@ interface ButtonProps {
   path: string;
   method: string;
   messageUp: (response: any) => void;
+  messageReset: (value: boolean) => void;
   message: string;
   payload?: ChatPayload;
 }
 
-export default function ChatButton({ path, method, messageUp, message, payload = {} }: ButtonProps) {
+export default function ChatButton({ path, method, messageUp, messageReset, message, payload = {} }: ButtonProps) {
 
   // Function to handle button click
   payload['action'] = 'message'
   payload['data'] = message
   const handleGoClick = async () => {
     try {
+      messageReset(true);
       let response;
       if(method=='POST'){
         response = await fetch(path, {
@@ -60,7 +62,6 @@ export default function ChatButton({ path, method, messageUp, message, payload =
 
   return (
     
-        <Snail onClick={handleGoClick} className="h-5 w-5" />
-        
+        <Snail color="#f8f7f7" onClick={handleGoClick} className="h-5 w-5" />
   )
 }

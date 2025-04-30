@@ -51,11 +51,12 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                 payload={payload}
                 trigger={shouldSend}
             />
-            <span className="hidden">
+            <span className="">
                 <ChatButton
-                    path={`${import.meta.env.VITE_API_URL}/_schd/run/${payload['handler']}`}
+                    path={`${import.meta.env.VITE_API_URL}/_chat/tb`}
                     method='POST'
                     messageUp={messageUp}
+                    messageReset={messageReset}
                     message={unsentMessage}
                     payload={payload}
                 />
