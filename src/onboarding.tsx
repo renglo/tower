@@ -16,26 +16,31 @@ const importOnboarding = (tool: string) => {
 };
 
 export default function Onboarding() {   
-
     const context = useContext(GlobalContext);
     if (!context) {
         throw new Error('No GlobalProvider');
     }
     const { tree } = context;
 
-    // Find the tool with bootstrap=true
-    const bootstrapTool = toolsConfig['bootstrap'];
+    const bootstrapComponents: React.ComponentType<{ tree: any }>[] = [];
     
-    if (!bootstrapTool) {
-        return null;
-    }
+    for (const bootstrapTool of toolsConfig['bootstrap']) {
+        if (!bootstrapTool) {
+            return null;
+        }
 
-    // Dynamically load the onboarding component
-    const OnboardingComponent = importOnboarding(bootstrapTool);
-           
+        // Dynamically load the onboarding component
+        const OnboardingComponent = importOnboarding(bootstrapTool);
+        bootstrapComponents.push(OnboardingComponent);
+    }
+            
     return ( 
-        <Suspense fallback={<div></div>}>
-            <OnboardingComponent tree={tree} />
-        </Suspense>    
+        <>
+            {bootstrapComponents.map((OnboardingComponent, index) => (
+                <Suspense key={index} fallback={<div></div>}>
+                    <OnboardingComponent tree={tree} />
+                </Suspense>    
+            ))}
+        </>
     )
 }

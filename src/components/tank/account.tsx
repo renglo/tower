@@ -209,7 +209,7 @@ export default function Account() {
             </Card> 
             
             <Onboarding/>
-            
+      
           </div>
           
         </div>

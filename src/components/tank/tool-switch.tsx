@@ -102,7 +102,7 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
                                 key={tool_id}
                                 value={tool_id}
                                 onSelect={() => {
-                                  setSelectedTool(tool_id);
+                                  setSelectedTool(tree.portfolios[p_portfolio].tools[tool_id].handle);
                                   setOpen(false);
                                   refreshUp();
                                   navigate(`/${p_portfolio}/${p_org}/${tree.portfolios[p_portfolio].tools[tool_id].handle}`);
@@ -115,7 +115,7 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
                                       "text-xxs",
                                       tool_id === selectedTool ? "opacity-100" : "opacity-30"
                                     )}
-                                    variant="outline">{tree.portfolios[p_portfolio].tools[tool_id].name}</Badge>
+                                    variant="outline">{tree.portfolios[p_portfolio].tools[tool_id].handle}</Badge>
 
                                   <span
                                     className={cn(

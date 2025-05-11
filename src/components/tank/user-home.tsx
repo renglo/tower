@@ -66,7 +66,7 @@ export default function UserHome() {
 
               //Check if p.orgs is empty, if it is, skip this Object
             
-            
+           
           <Card className="max-w-xs">
             <CardHeader>
               <CardTitle>{p.name}
@@ -124,7 +124,8 @@ export default function UserHome() {
 
           ) : (
             <div className='flex flex-col gap-4'>
-            <Onboarding/>
+         
+            <span>Go to account settings to install apps in your environment. <a href='/account'>Click here</a></span>
             </div>
           )      
 
