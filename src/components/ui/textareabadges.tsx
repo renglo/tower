@@ -8,6 +8,7 @@ interface TextareaBadgesProps extends React.ComponentProps<"textarea"> {
   context?: {
     portfolio?: string;
     org?: string;
+    section?: string;
     thread?: string;
   };
 }
@@ -16,6 +17,7 @@ const Badges = React.memo(({ context }: { context?: TextareaBadgesProps['context
   <span className="flex flex-row gap-1 p-2">
     <Badge variant="outline">Portfolio: {context?.portfolio || ''}</Badge>
     <Badge variant="outline">Org: {context?.org || ''}</Badge>
+    <Badge variant="outline">Section: {context?.section || ''}</Badge>
     <Badge variant="outline">Thread: {context?.thread || ''}</Badge>
   </span>
 ));

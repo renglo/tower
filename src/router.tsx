@@ -38,7 +38,7 @@ const importTool = (tool: string) => {
 
 export default function ToolRouter() {
 
-    const { portfolio, org, tool, ring } = useParams();
+    const { portfolio, org, tool, section } = useParams();
 
     // Handle case when context might be undefined
     const context = useContext(GlobalContext);
@@ -56,7 +56,7 @@ export default function ToolRouter() {
         find((toolId: string) => tree.portfolios[portfolio]?.tools[toolId]?.handle === tool);
 
 
-    console.log('Router : Portfolio/Org/Tool/Ring',portfolio,org,tool_id,ring);
+    console.log('Router : Portfolio/Org/Tool/Section',portfolio,org,tool_id,section);
 
 
     // Only render if tool exists in config
@@ -73,7 +73,7 @@ export default function ToolRouter() {
                 portfolio={portfolio}
                 org={org}
                 tool={tool_id}
-                ring={ring}
+                section={section}
                 tree = {tree}
              />
         </Suspense>

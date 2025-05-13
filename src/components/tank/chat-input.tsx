@@ -34,6 +34,7 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                 context={{
                     portfolio: captions['portfolio_name'],
                     org: captions['org_name'],
+                    section: captions['section_name'],
                     thread: captions['activeThread']
                 }}
                 onKeyDown={(e) => {
