@@ -53,7 +53,7 @@ export default function Root() {
   }
   const { user, loadUser, tree, loadTree } = context;
   
-  const { portfolio, org, tool, ring } = useParams(); // Extract the 'route' parameter from the URL
+  const { portfolio, org, tool, section } = useParams(); // Extract the 'route' parameter from the URL
   const [refresh, setRefresh] = useState(false);
   const location = useLocation();
 
@@ -161,7 +161,7 @@ export default function Root() {
             portfolio={`${portfolio}`} 
             org={`${org}`} 
             tool={`${tool}`} 
-            ring={`${ring}`} 
+            section={`${section}`} 
          />
 
         <nav 
@@ -199,7 +199,7 @@ export default function Root() {
             portfolio={`${portfolio}`}
             org={`${org}`}
             tool={`${tool}`}
-            ring={`${ring}`}
+            section={`${section}`}
           />
             
 

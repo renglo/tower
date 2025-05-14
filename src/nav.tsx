@@ -21,10 +21,10 @@ interface SideNavProps {
     portfolio: string;
     org: string;
     tool?: string;
-    ring?: string;
+    section?: string;
 }
 
-export default function SideNav({portfolio, org, tool, ring}: SideNavProps) {  
+export default function SideNav({portfolio, org, tool, section}: SideNavProps) {  
     
     const navigate = useNavigate();
     
@@ -46,7 +46,7 @@ export default function SideNav({portfolio, org, tool, ring}: SideNavProps) {
                     portfolio={portfolio} 
                     org={org}
                     tool={tool}
-                    ring={ring}
+                    section={section}
                     onNavigate={handleNavigation}
                 /> 
         </Suspense>

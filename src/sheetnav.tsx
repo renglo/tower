@@ -20,10 +20,10 @@ interface SheetNavProps {
     portfolio: string;
     org: string;
     tool: string;
-    ring: string;
+    section: string;
 }
 
-export default function SheetNav({portfolio, org, tool, ring}: SheetNavProps) {   
+export default function SheetNav({portfolio, org, tool, section}: SheetNavProps) {   
     
     const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export default function SheetNav({portfolio, org, tool, ring}: SheetNavProps) {
                         portfolio={portfolio} 
                         org={org} 
                         tool={tool} 
-                        ring={ring} 
+                        section={section} 
                         onNavigate={handleNavigation}
                     />
                 </WindowSizeProvider>
