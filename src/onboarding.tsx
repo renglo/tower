@@ -29,6 +29,8 @@ export default function Onboarding() {
             return null;
         }
 
+        console.log(bootstrapTool);
+
         // Dynamically load the onboarding component
         const OnboardingComponent = importOnboarding(bootstrapTool);
         bootstrapComponents.push(OnboardingComponent);
