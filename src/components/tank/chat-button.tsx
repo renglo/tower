@@ -20,7 +20,6 @@ interface ButtonProps {
 export default function ChatButton({ path, method, messageUp, messageReset, message, payload = {} }: ButtonProps) {
 
   // Function to handle button click
-  payload['action'] = 'message'
   payload['data'] = message
   const handleGoClick = async () => {
     try {
