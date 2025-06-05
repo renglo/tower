@@ -99,10 +99,9 @@ export default function WebSocketButton({messageUp,messageReset,message,payload 
           const msg = {
             "type":'rq',
             "doc":{
-              "message":message,
-              "author_id":sessionStorage.cu_handle,
+              "author_id":sessionStorage.cu_handle, 
               "time": Math.floor(Date.now() / 1000),
-              "output":''
+              "messages":[{"_out":{"role":"user","content":message},"_type":"text"}]
             }
           }
 
