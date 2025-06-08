@@ -50,12 +50,12 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
                             </DropdownMenuItem>
                         ))}
                     <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem className="hidden">
                             New chat
                         </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-            <Button variant="ghost" className="" onClick={() => actionUp('new_workspace')}>
+            <Button variant="ghost" className="hidden" onClick={() => actionUp('new_workspace')}>
                     <span className="sr-only">New Workspace</span>
                     <ToyBrick className="h-8 w-8" />
             </Button>
@@ -63,7 +63,7 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
             <div className="h-px w-full bg-gray-200 my-2"></div>
 
 
-            <Button variant="ghost" className="" onClick={() => actionUp('new_concept')}>
+            <Button variant="ghost" className="hidden" onClick={() => actionUp('new_concept')}>
                     <span className="sr-only">New Concept</span>
                     <Boxes className="h-6 w-6" />
             </Button>

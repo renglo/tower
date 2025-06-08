@@ -3,5 +3,5 @@
       "data": "1.0.0",
       "schd":"1.0.0"
     },
-    "bootstrap":""
+    "bootstrap":["schd"]
   }

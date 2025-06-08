@@ -18,6 +18,8 @@ import { useContext } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
 import { NavLink } from "react-router-dom";
 
+import Onboarding from "@/onboarding"
+
 interface Portfolio {
   name: string;
   portfolio_id: string;

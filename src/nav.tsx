@@ -33,6 +33,8 @@ export default function SideNav({portfolio, org, tool, section}: SideNavProps) {
         return null;
     }
 
+    console.log('Tools')
+
     const handleNavigation = (path: string) => {
         navigate(path);
       };
