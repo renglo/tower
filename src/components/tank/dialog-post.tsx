@@ -12,6 +12,10 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import FormPost from "@/components/tank/form-post"
 import { useState } from 'react';
 
+import {
+  SquarePlus,
+} from "lucide-react"
+
 
 interface DialogPostProps {
   refreshUp: () => void; // refreshUpis a function 
@@ -39,7 +43,8 @@ export default function DialogPost({ refreshUp, blueprint, path, method, title, 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{buttontext || 'Create New'}</Button>
+        
+        <SquarePlus />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
