@@ -1,5 +1,4 @@
-
-export default function ChatWidgetText({ key,item }) {
+export default function ChatWidgetText({ key, item }: { key: string; item: { _out: { content: string | number | any } } }) {
 
 
 

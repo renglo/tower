@@ -7,7 +7,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 
 
-export default function ChatWidgetCommand({ key,item }) {
+export default function ChatWidgetCommand({ key, item }: { key: string; item: { _out: string } }) {
 
 
 
