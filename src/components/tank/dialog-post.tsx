@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -43,8 +42,10 @@ export default function DialogPost({ refreshUp, blueprint, path, method, title, 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        
-        <SquarePlus />
+        <div className="flex flex-row gap-3">
+          <SquarePlus />
+          {buttontext}
+        </div>    
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
