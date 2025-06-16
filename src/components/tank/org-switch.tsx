@@ -17,6 +17,10 @@ import {
   AvatarsqFallback,
   AvatarsqImage,
 } from "@/components/ui/avatarsq"
+import { 
+  Globe,
+  Asterisk,
+ } from "lucide-react"
 
 import { useState, useContext } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
@@ -58,11 +62,25 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
   const p_portfolio = location.pathname.split('/')[1];
 
   const [open, setOpen] = useState(false);
-  const [selectedOrg, setSelectedOrg] = useState(location.pathname.split('/')[2]);
+  const [selectedOrg, setSelectedOrg] = useState<string | undefined>(location.pathname.split('/')[2]);
 
   const app_now = location.pathname.split('/')[3];
   const ring_now = location.pathname.split('/')[4] || '';
 
+  const handleOrgSwitch = (newOrg: string) => {
+    // If switching from _all to anything else, navigate without ring_now
+    if (selectedOrg === '_all' && newOrg !== '_all') {
+      setSelectedOrg(newOrg);
+      setOpen(false);
+      refreshUp();
+      navigate(`/${p_portfolio}/${newOrg}/${app_now}`);
+    } else {
+      setSelectedOrg(newOrg);
+      setOpen(false);
+      refreshUp();
+      navigate(`/${p_portfolio}/${newOrg}/${app_now}/${ring_now}`);
+    }
+  };
 
   return (
     <div className="flex items-center space-x-4">
@@ -72,11 +90,15 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
             {selectedOrg ? (
             <>
             <Avatarsq>
-                <AvatarsqImage src={`${import.meta.env.VITE_API_URL}/_docs/${p_portfolio}/${selectedOrg}/_thumbnails/${selectedOrg}.png`} />
-                <AvatarsqFallback></AvatarsqFallback>
+                {selectedOrg === '_all' ? (
+                    <AvatarsqImage src='/icons/Asterisk.svg' />
+                ) : (
+                    <AvatarsqImage src={`${import.meta.env.VITE_API_URL}/_docs/${p_portfolio}/${selectedOrg}/_thumbnails/${selectedOrg}.png`} />
+                )}
+                
             </Avatarsq>
             
-             <span className="text-xxs ">{tree && 'portfolios' in tree ? tree?.portfolios[p_portfolio]?.orgs[selectedOrg]?.name : ''}</span>
+             <span className="text-xxs ">{selectedOrg === '_all' ? 'All' : (tree && 'portfolios' in tree ? tree?.portfolios[p_portfolio]?.orgs[selectedOrg]?.name : '')}</span>
             </>
             ) : (
             <span className="text-xxs ">Select One</span>
@@ -100,10 +122,7 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
                                 key={row.org_id}
                                 value={row.org_id}
                                 onSelect={() => {
-                                  setSelectedOrg(row.org_id);
-                                  setOpen(false);
-                                  refreshUp();
-                                  navigate(`/${p_portfolio}/${row.org_id}/${app_now}/${ring_now}`);
+                                  handleOrgSwitch(row.org_id);
                                 }}
                               >
                                 <div className="flex items-center gap-4 flex-row">
@@ -136,7 +155,35 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
                           <div className="text-xs text-muted-foreground"></div> // Handle loading state
                       )}
 
-
+                              <CommandItem
+                                key="_all"
+                                value="_all"
+                                onSelect={() => {
+                                  handleOrgSwitch("_all");
+                                }}
+                              >
+                                <div className="flex items-center gap-4 flex-row">
+                                  <Avatarsq
+                                    className={cn(
+                                      "",
+                                      "_all" === selectedOrg ? "opacity-100" : "opacity-30"
+                                    )}
+                                  >
+                                    <AvatarsqImage src='/icons/Asterisk.svg' />
+                                    <AvatarsqFallback>
+                                    
+                                    </AvatarsqFallback>
+                                  </Avatarsq>
+                                  <span
+                                    className={cn(
+                                      "",
+                                      "_all" === selectedOrg ? "font-extrabold" : "font-light"
+                                    )}
+                                  >
+                                    ALL
+                                  </span>
+                                </div>
+                              </CommandItem>
 
               </CommandGroup>
             </CommandList>

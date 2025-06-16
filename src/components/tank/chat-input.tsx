@@ -1,5 +1,6 @@
 import WebSocketButton from "@/components/tank/websocket-button"
 import ChatButton from "@/components/tank/chat-button"
+import GupshupButton from "@/components/tank/gupshup-button"
 import { TextareaBadges } from "@/components/ui/textareabadges"
 import { useState} from 'react';
 
@@ -55,6 +56,16 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
             <span className="">
                 <ChatButton
                     path={`${import.meta.env.VITE_API_URL}/_chat/tb`}
+                    method='POST'
+                    messageUp={messageUp}
+                    messageReset={messageReset}
+                    message={unsentMessage}
+                    payload={payload}
+                />
+            </span>
+            <span className="">
+                <GupshupButton
+                    path={`${import.meta.env.VITE_API_URL}/_chat/gs_in/${payload['portfolio']}/${payload['tool']}`}
                     method='POST'
                     messageUp={messageUp}
                     messageReset={messageReset}

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { GlobalContext } from "@/components/tank/global-context"
 import toolsConfig from '@/tools.json';
 
@@ -39,6 +39,8 @@ const importTool = (tool: string) => {
 export default function ToolRouter() {
 
     const { portfolio, org, tool, section } = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryParams = Object.fromEntries(searchParams?.entries() || []) || {};
 
     // Handle case when context might be undefined
     const context = useContext(GlobalContext);
@@ -52,11 +54,20 @@ export default function ToolRouter() {
         return null;
     }
 
-    const tool_id = tree.portfolios[portfolio]?.orgs[org]?.tools?.
+    let tool_id
+    if(org == '_all'){ 
+        tool_id = Object.entries(tree.portfolios[portfolio]?.tools || {}).find(([_, toolData]) => toolData.handle === tool)?.[0];
+    }else{
+        //Translate tool handle into tool id
+        tool_id = tree.portfolios[portfolio]?.orgs[org]?.tools?.
         find((toolId: string) => tree.portfolios[portfolio]?.tools[toolId]?.handle === tool);
+    }
 
+    
 
-    console.log('Router : Portfolio/Org/Tool/Section',portfolio,org,tool_id,section);
+    
+
+    console.log('Router : Portfolio/Org/Tool/Section/Query',portfolio,org,tool_id,section,queryParams);
 
 
     // Only render if tool exists in config
@@ -75,6 +86,7 @@ export default function ToolRouter() {
                 tool={tool_id}
                 section={section}
                 tree = {tree}
+                query = {queryParams}
              />
         </Suspense>
     );
