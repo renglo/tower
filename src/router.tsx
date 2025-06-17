@@ -39,7 +39,7 @@ const importTool = (tool: string) => {
 export default function ToolRouter() {
 
     const { portfolio, org, tool, section } = useParams();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const queryParams = Object.fromEntries(searchParams?.entries() || []) || {};
 
     // Handle case when context might be undefined

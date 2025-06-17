@@ -35,7 +35,6 @@ import{
   AvatarsqImage,
 } from "@/components/ui/avatarsq"
 import { Toaster } from "@/components/ui/toaster"
-import PortfolioSwitch from "@/components/tank/portfolio-switch"
 import OrgSwitch from "@/components/tank/org-switch"
 import ToolSwitch from "@/components/tank/tool-switch"
 import SideNav from "../../nav"
@@ -207,7 +206,7 @@ export default function Root() {
           {(location.pathname.split('/')[2] !== 'settings' && location.pathname.split('/')[2])  && (
             <Breadcrumb className="">
               <BreadcrumbList>
-              
+
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <OrgSwitch

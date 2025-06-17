@@ -12,11 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {
-  Avatarsq,
-  AvatarsqFallback,
-  AvatarsqImage,
-} from "@/components/ui/avatarsq"
+
 import { Badge } from "@/components/ui/badge"
 
 import { useState, useContext } from 'react';

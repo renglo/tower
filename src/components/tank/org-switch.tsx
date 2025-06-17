@@ -17,10 +17,7 @@ import {
   AvatarsqFallback,
   AvatarsqImage,
 } from "@/components/ui/avatarsq"
-import { 
-  Globe,
-  Asterisk,
- } from "lucide-react"
+
 
 import { useState, useContext } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
