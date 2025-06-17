@@ -63,16 +63,18 @@ export default function ChatInput({messageUp,payload = {},captions = {}}: InputP
                     payload={payload}
                 />
             </span>
-            <span className="">
-                <GupshupButton
-                    path={`${import.meta.env.VITE_API_URL}/_chat/gs_in/${payload['portfolio']}/${payload['tool']}`}
-                    method='POST'
-                    messageUp={messageUp}
-                    messageReset={messageReset}
-                    message={unsentMessage}
-                    payload={payload}
-                />
-            </span>
+            {payload['org'] === '_all' && (
+                <span className="">
+                    <GupshupButton
+                        path={`${import.meta.env.VITE_API_URL}/_chat/gs_in/${payload['portfolio']}/${payload['tool']}`}
+                        method='POST'
+                        messageUp={messageUp}
+                        messageReset={messageReset}
+                        message={unsentMessage}
+                        payload={payload}
+                    />
+                </span>
+            )}
             
             
         </div>
