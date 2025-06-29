@@ -152,6 +152,7 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
                           <div className="text-xs text-muted-foreground"></div> // Handle loading state
                       )}
 
+                      {(import.meta.env.VITE_CROSS_ORG === 'true') && (
                               <CommandItem
                                 key="_all"
                                 value="_all"
@@ -181,6 +182,7 @@ export default function OrgSwitch({ refreshUp }: OrgSwitchProps) {
                                   </span>
                                 </div>
                               </CommandItem>
+                      )}
 
               </CommandGroup>
             </CommandList>
