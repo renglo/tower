@@ -1,7 +1,8 @@
 import {
     Send,
 } from "lucide-react"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useWebSocket } from "../../hooks/useWebSocket";
 
 interface WebSocketPayload {
   action?: string;
@@ -22,107 +23,48 @@ interface ButtonProps {
 
 export default function WebSocketButton({messageUp,messageReset,message,payload = {} as WebSocketPayload, trigger}: ButtonProps) {
 
-    const [ws, setWs] = useState<WebSocket | null>(null);
-    const [isConnecting, setIsConnecting] = useState(false);
-
-    const connectWebSocket = () => {
-        if (isConnecting) return;
-        
-        setIsConnecting(true);
-        const socket = new WebSocket(`${import.meta.env.VITE_WEBSOCKET_URL}`);
-    
-        socket.onopen = () => {
-          console.log("WebSocket connected");
-          setIsConnecting(false);
-        };
-    
-        socket.onmessage = (event) => {
-          console.log("Received message:", event.data); 
-          const msg = {
-            "type":'rs',
-            "update": JSON.parse(event.data)
-          }
-          messageUp(msg);
-        };
-    
-        socket.onerror = (error) => {
-          console.error("WebSocket error:", error);
-          setIsConnecting(false);
-        };
-    
-        socket.onclose = () => {
-          console.log("WebSocket disconnected");
-          setIsConnecting(false);
-          // Attempt to reconnect after a delay
-          setTimeout(() => {
-            if (!ws || ws.readyState !== WebSocket.OPEN) {
-              connectWebSocket();
-            }
-          }, 3000); // Wait 3 seconds before attempting to reconnect
-        };
-    
-        setWs(socket);
-    };
-
-    useEffect(() => {
-        connectWebSocket();
-    
-        // Clean up the WebSocket connection when the component unmounts
-        return () => {
-          if (ws) {
-            ws.close();
-          }
-        };
-    }, []);
+    const { sendMessage, isConnected } = useWebSocket({
+        onMessage: (data) => {
+            const msg = {
+                "type": 'rs',
+                "update": data
+            };
+            messageUp(msg);
+        }
+    });
 
     useEffect(() => {
         if (trigger) {
-            sendMessage();
+            handleSendMessage();
         }
     }, [trigger]);
 
-    const sendMessage = () => {
-        if (ws && ws.readyState === WebSocket.OPEN) {
-          console.log('Message out:',message)
-    
-          const ws_payload = {
-            action: payload.action,
-            data: message,
-            auth: `${sessionStorage.accessToken}`,
-            entity_type: payload.entity_type,
-            entity_id: payload.entity_id,
-            thread: payload.thread,
-            portfolio: payload.portfolio,
-            org: payload.org
-          };
-
-          const msg = {
-            "type":'rq',
-            "doc":{
-              "author_id":sessionStorage.cu_handle, 
-              "time": Math.floor(Date.now() / 1000),
-              "messages":[{"_out":{"role":"user","content":message},"_type":"text"}]
-            }
-          }
-
-          ws.send(JSON.stringify(ws_payload));
-          messageReset(true);
-          messageUp(msg);
+    const handleSendMessage = () => {
+        const success = sendMessage(message, payload);
+        
+        if (success) {
+            const msg = {
+                "type": 'rq',
+                "doc": {
+                    "author_id": sessionStorage.cu_handle,
+                    "time": Math.floor(Date.now() / 1000),
+                    "messages": [{"_out": {"role": "user", "content": message}, "_type": "text"}]
+                }
+            };
+            messageUp(msg);
+            messageReset(true);
         } else {
-          console.error("WebSocket is not connected.");
-          messageReset(false);
-          // Attempt to reconnect if not already connecting
-          if (!isConnecting) {
-            connectWebSocket();
-          }
+            messageReset(false);
         }
     };
 
     return (
-
         <span className="flex items-center">
-          <Send onClick={sendMessage} className="h-5 w-5" />
+          <Send 
+            onClick={handleSendMessage} 
+            className={`h-5 w-5 ${!isConnected ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            style={{ pointerEvents: isConnected ? 'auto' : 'none' }}
+          />
         </span>     
-        
     )
 }
