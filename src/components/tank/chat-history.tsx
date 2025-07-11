@@ -31,7 +31,7 @@ export default function ChatHistory({history, actionUp}: ChatHistoryProps) {
 
     return (
         <>
-            <Button variant="ghost" className="hidden" onClick={() => actionUp('new_thread')}>
+            <Button variant="ghost" className="" onClick={() => actionUp('new_thread')}>
                     <span className="sr-only">New Chat</span>
                     <Plus className="h-8 w-8" />
             </Button>
