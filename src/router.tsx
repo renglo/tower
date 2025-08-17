@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext } from 'react';
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "@/components/tank/global-context"
 import toolsConfig from '@/tools.json';
 
@@ -44,6 +44,7 @@ export default function ToolRouter() {
 
     // Handle case when context might be undefined
     const context = useContext(GlobalContext);
+    const navigate = useNavigate();
 
     if (!context) {
         throw new Error("No GlobalProvider");
@@ -75,6 +76,10 @@ export default function ToolRouter() {
         return null;
     }
 
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    };
+
     // Dynamically load the tool component
     const ToolComponent = importTool(tool);
        
@@ -87,6 +92,7 @@ export default function ToolRouter() {
                 section={section}
                 tree = {tree}
                 query = {queryParams}
+                onNavigate={handleNavigation}
              />
         </Suspense>
     );
