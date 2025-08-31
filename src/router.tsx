@@ -38,7 +38,7 @@ const importTool = (tool: string) => {
 
 export default function ToolRouter() {
 
-    const { portfolio, org, tool, section } = useParams();
+    const { portfolio, org, tool, section, p1, p2, p3} = useParams();
     const [searchParams] = useSearchParams();
     const queryParams = Object.fromEntries(searchParams?.entries() || []) || {};
 
@@ -68,7 +68,7 @@ export default function ToolRouter() {
 
     
 
-    console.log('Router : Portfolio/Org/Tool/Section/Query',portfolio,org,tool_id,section,queryParams);
+    console.log('Router : Portfolio/Org/Tool/Section/p1/p2/p3/Query',portfolio,org,tool_id,section,p1,p2,p3,queryParams);
 
 
     // Only render if tool exists in config
@@ -93,6 +93,9 @@ export default function ToolRouter() {
                 tree = {tree}
                 query = {queryParams}
                 onNavigate={handleNavigation}
+                p1={p1}
+                p2={p2}
+                p3={p3}
              />
         </Suspense>
     );

@@ -61,6 +61,9 @@ createRoot(document.getElementById('root')!).render(
             </Route>
             <Route path=":portfolio/:org/:tool" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
             <Route path=":portfolio/:org/:tool/:section" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
+            <Route path=":portfolio/:org/:tool/:section/:p1" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
+            <Route path=":portfolio/:org/:tool/:section/:p1/:p2" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
+            <Route path=":portfolio/:org/:tool/:section/:p1/:p2/:p3" element={isAuthenticated() ? <ToolRouter /> : <Navigate replace to="/login" />} />
           </Route>
           <Route path="/login" element={<AuthLogin />} />
           <Route path="/register" element={<AuthRegister />} />
