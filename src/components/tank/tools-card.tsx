@@ -130,7 +130,7 @@ export default function ToolsCard({tooldoc,teamsdict,orgsdict,portfolioid}: Tool
                         ))
                      ) : (
                         
-                            <td colSpan={3}>No teams available</td>
+                            <td colSpan={3}></td>
                         
                      )
                     }
@@ -186,7 +186,7 @@ export default function ToolsCard({tooldoc,teamsdict,orgsdict,portfolioid}: Tool
                                     ))
                                 ) : (
                                     
-                                        <td colSpan={3}>No teams available</td>
+                                        <td colSpan={3}>No orgs available (create at least one)</td>
                                     
                                 )
                             }
