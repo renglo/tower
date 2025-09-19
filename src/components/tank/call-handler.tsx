@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from 'react';
 
 interface CallHandlerProps {
   path: string;
@@ -67,7 +66,6 @@ export default function CallHandler({
   onError 
 }: CallHandlerProps) {
 
-  const [open, setOpen] = useState(false);
   console.log('Manual Trigger')
   
 
@@ -108,7 +106,6 @@ export default function CallHandler({
               </pre>
           ),
         });
-        setOpen(false);
         statusUp();
         
         // Call onResponse with the response data
@@ -129,7 +126,6 @@ export default function CallHandler({
               </pre>
           ),
         });
-        setOpen(false);
 
         // Send error details to parent component
         if (onError) {
