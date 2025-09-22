@@ -4,6 +4,7 @@ import { GlobalContext } from "@/components/tank/global-context"
 
 // Import onboarding component dynamically
 const importOnboarding = (tool: string) => {
+    console.log(`@tools/${tool}/ui/onboarding/${tool}_onboarding.tsx`);
     return lazy(() => 
         import(`@tools/${tool}/ui/onboarding/${tool}_onboarding.tsx`)
             .catch(() => {
@@ -29,7 +30,7 @@ export default function Onboarding() {
             return null;
         }
 
-        console.log(bootstrapTool);
+        console.log('Bootstraping:',bootstrapTool);
 
         // Dynamically load the onboarding component
         const OnboardingComponent = importOnboarding(bootstrapTool);

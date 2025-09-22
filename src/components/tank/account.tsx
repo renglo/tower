@@ -188,7 +188,7 @@ export default function Account() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Refresh Auth Tree </CardTitle>
+                <CardTitle>Refresh Auth Tree</CardTitle>
                 <CardDescription>
                 The system doesn't need you to refresh the tree as it does it automatically. Use this option only to troubleshoot. 
                 </CardDescription>
