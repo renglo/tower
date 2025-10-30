@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from "@/components/tank/global-context"
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -63,10 +63,25 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
 
   const [open, setOpen] = useState(false);
   const [selectedTool, setSelectedTool] = useState(location.pathname.split('/')[3]);
-
-
   
+  // Find tool by handle since selectedTool is the handle, not the ID
+  const findToolByName = (handle: string) => {
+    if (!tree || !('portfolios' in tree) || !tree.portfolios[p_portfolio]?.tools) return null;
+    return Object.values(tree.portfolios[p_portfolio].tools).find(tool => tool.handle === handle);
+  };
+  
+  const [selectedToolName, setSelectedToolName] = useState(findToolByName(selectedTool)?.name || '');
 
+  // Update tool name when tree or selectedTool changes
+  useEffect(() => {
+    if (!selectedTool || !tree || !('portfolios' in tree) || !tree.portfolios[p_portfolio]?.tools) {
+      setSelectedToolName('');
+      return;
+    }
+    
+    const tool = Object.values(tree.portfolios[p_portfolio].tools).find(tool => tool.handle === selectedTool);
+    setSelectedToolName(tool?.name || '');
+  }, [selectedTool, tree, p_portfolio]);
 
   return (
     <div className="flex items-center space-x-4">
@@ -75,7 +90,7 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
             <div className="flex items-center flex-col">
             {selectedTool ? (
             
-            <Badge variant="outline" className="text-xxs">{selectedTool}</Badge>
+            <Badge variant="outline" className="text-xxs">{selectedToolName}</Badge>
             
             ) : (
             <span className="text-xxs ">Select One</span>
@@ -103,6 +118,7 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
                                 value={tool_id}
                                 onSelect={() => {
                                   setSelectedTool(tree.portfolios[p_portfolio].tools[tool_id].handle);
+                                  setSelectedToolName(tree.portfolios[p_portfolio].tools[tool_id].name);
                                   setOpen(false);
                                   refreshUp();
                                   navigate(`/${p_portfolio}/${p_org}/${tree.portfolios[p_portfolio].tools[tool_id].handle}`);
@@ -115,7 +131,7 @@ export default function ToolSwitch({ refreshUp }: ToolSwitchProps) {
                                       "text-xxs",
                                       tool_id === selectedTool ? "opacity-100" : "opacity-30"
                                     )}
-                                    variant="outline">{tree.portfolios[p_portfolio].tools[tool_id].handle}</Badge>
+                                    variant="outline">{tree.portfolios[p_portfolio].tools[tool_id].name}</Badge>
 
                                   <span
                                     className={cn(
